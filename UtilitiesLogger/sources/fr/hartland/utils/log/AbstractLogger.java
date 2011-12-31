@@ -5,7 +5,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-abstract class AbstractLogger implements ILogger {
+/**
+ * The abstract logger provides core functionalities common to any {@link ILogger} implementation.
+ */
+abstract class AbstractLogger implements ILogger
+{
 
 	private final PrintStream out;
 	private Level level;

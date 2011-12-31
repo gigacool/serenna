@@ -4,8 +4,8 @@ package fr.hartland.utils.log;
  * General logging interface.
  * 
  */
-public interface ILogger {
-
+public interface ILogger
+{
 	/**
 	 * Logging detail level.
 	 */
@@ -63,5 +63,5 @@ public interface ILogger {
 	 *            the message to display within logs.
 	 */
 	void debug(String message);
-	
+
 }

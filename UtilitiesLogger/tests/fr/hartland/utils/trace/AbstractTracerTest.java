@@ -9,19 +9,20 @@ import org.junit.Test;
 /**
  * Provides minimal tests for the abstract tracer implementation.
  */
-public class AbstractTracerTest {
+public class AbstractTracerTest
+{
 
 	protected static String lineSeparator = System.getProperty("line.separator");
 
 	/**
-	 * testLoggerDebug make sure every data is printed whatever their level.
+	 * testStringTrace make sure String data are correctly traced.
 	 */
 	@Test
-	public void testLoggerDebug()
+	public void testStringTrace()
 	{
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractTracer tracer = new AbstractTracer(new PrintStream(out)) {
+		ITracer<String> tracer = new AbstractTracer<String>(new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -31,6 +32,47 @@ public class AbstractTracerTest {
 		// Assertions
 		String result = new String(out.toByteArray());
 		Assert.assertTrue(result.contains("1;2;3" + lineSeparator + "6;5;4" + lineSeparator + "7;8;9"));
+	}
+
+	/**
+	 * testIntegerTrace make sure integer data are correctly traced.
+	 */
+	@Test
+	public void testIntegerTrace()
+	{
+		// Setup
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ITracer<Integer> tracer = new AbstractTracer<Integer>(new PrintStream(out)) {
+			// NOP
+		};
+		// Test
+		tracer.addDataRow(1, 2, 3);
+		tracer.addDataRow(6, 5, 4);
+		tracer.addDataRow(7, 8, 9);
+		// Assertions
+		String result = new String(out.toByteArray());
+		Assert.assertTrue(result.contains("1;2;3" + lineSeparator + "6;5;4" + lineSeparator + "7;8;9"));
+	}
+
+	/**
+	 * testDoubleTrace make sure every double data are correctly traced.
+	 */
+	@Test
+	public void testDoubleTrace()
+	{
+		// Setup
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ITracer<Double> tracer = new AbstractTracer<Double>(new PrintStream(out)) {
+			// NOP
+		};
+		// Test
+		tracer.addDataRow(1., 2., 3.);
+		tracer.addDataRow(6., 5., 4.);
+		tracer.addDataRow(7., 8., 9.);
+		// Assertions
+		String result = new String(out.toByteArray());
+		System.out.println(result);
+		Assert.assertTrue(result.contains("1.0;2.0;3.0" + lineSeparator + "6.0;5.0;4.0" + lineSeparator + "7.0;8.0;9.0"));
 	}
 
 }

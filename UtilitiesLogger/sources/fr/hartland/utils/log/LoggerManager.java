@@ -8,6 +8,7 @@ import fr.hartland.utils.log.ILogger.Level;
 
 /**
  * Provides uniform mean to create file targeted loggers.
+ * 
  */
 public class LoggerManager {
 
