@@ -6,8 +6,12 @@ import java.io.PrintStream;
 
 /**
  * Provides an interface toward file output tracing.
+ * 
+ * @param <T>
+ *            Output data type.
  */
-public class FileTracer extends AbstractTracer {
+public class FileTracer<T> extends AbstractTracer<T>
+{
 
 	/**
 	 * Default constructor.
@@ -28,8 +32,7 @@ public class FileTracer extends AbstractTracer {
 	 * @param filePath
 	 *            the output target file path.
 	 * @param append
-	 *            true if the contents are to be appended to existing file,
-	 *            false to overwrite.
+	 *            true if the contents are to be appended to existing file, false to overwrite.
 	 * @throws FileNotFoundException
 	 *             if the file is not found.
 	 */
