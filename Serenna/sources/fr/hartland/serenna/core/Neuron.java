@@ -50,7 +50,7 @@ public class Neuron extends Node {
 			computed = true;
 		}
 		double tmp = 0;
-		for (Arc arc : getInputArcs())
+		for (Connection arc : getInputArcs())
 		{
 			arc.getInputNode().compute();
 			tmp += arc.getValue();

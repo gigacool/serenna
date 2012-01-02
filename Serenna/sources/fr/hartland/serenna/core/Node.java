@@ -13,8 +13,8 @@ public abstract class Node {
 
 	private final String name;
 
-	private final List<Arc> inputs;
-	private final List<Arc> outputs;
+	private final List<Connection> inputs;
+	private final List<Connection> outputs;
 
 	/**
 	 * Default constructor. Each node can have an identifier (non necessarily unique).
@@ -25,8 +25,8 @@ public abstract class Node {
 	public Node(String name)
 	{
 		this.name = name;
-		this.inputs = new ArrayList<Arc>();
-		this.outputs = new ArrayList<Arc>();
+		this.inputs = new ArrayList<Connection>();
+		this.outputs = new ArrayList<Connection>();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public abstract class Node {
 	 * @param input
 	 *            the input arc connection.
 	 */
-	public void addInput(Arc input)
+	public void addInput(Connection input)
 	{
 		this.inputs.add(input);
 	}
@@ -62,7 +62,7 @@ public abstract class Node {
 	 * @param output
 	 *            the output arc connection.
 	 */
-	public void addOutput(Arc output)
+	public void addOutput(Connection output)
 	{
 		this.outputs.add(output);
 	}
@@ -72,7 +72,7 @@ public abstract class Node {
 	 * 
 	 * @return the input arcs.
 	 */
-	public Iterable<Arc> getInputArcs()
+	public Iterable<Connection> getInputArcs()
 	{
 		return inputs;
 	}
@@ -82,7 +82,7 @@ public abstract class Node {
 	 * 
 	 * @return the output arcs.
 	 */
-	public Iterable<Arc> getOutputArcs()
+	public Iterable<Connection> getOutputArcs()
 	{
 		return outputs;
 	}
