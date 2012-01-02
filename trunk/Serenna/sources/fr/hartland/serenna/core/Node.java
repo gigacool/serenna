@@ -46,10 +46,10 @@ public abstract class Node {
 	}
 
 	/**
-	 * Append an input arc connection. The actual node become the output target for the arc.
+	 * Append an input connection connection. The actual node become the output target for the connection.
 	 * 
 	 * @param input
-	 *            the input arc connection.
+	 *            the input connection connection.
 	 */
 	public void addInput(Connection input)
 	{
@@ -57,10 +57,10 @@ public abstract class Node {
 	}
 
 	/**
-	 * Append an output arc connection. The actual node become the input target for the arc.
+	 * Append an output connection connection. The actual node become the input target for the connection.
 	 * 
 	 * @param output
-	 *            the output arc connection.
+	 *            the output connection connection.
 	 */
 	public void addOutput(Connection output)
 	{
@@ -68,21 +68,21 @@ public abstract class Node {
 	}
 
 	/**
-	 * Returns the input arcs defined for the current node.
+	 * Returns the input connections defined for the current node.
 	 * 
-	 * @return the input arcs.
+	 * @return the input connections.
 	 */
-	public Iterable<Connection> getInputArcs()
+	public Iterable<Connection> getInputConnections()
 	{
 		return inputs;
 	}
 
 	/**
-	 * Returns the output arcs defined for the current node.
+	 * Returns the output connections defined for the current node.
 	 * 
-	 * @return the output arcs.
+	 * @return the output connections.
 	 */
-	public Iterable<Connection> getOutputArcs()
+	public Iterable<Connection> getOutputConnections()
 	{
 		return outputs;
 	}
