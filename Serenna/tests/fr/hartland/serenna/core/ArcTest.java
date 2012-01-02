@@ -5,18 +5,18 @@ import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.hartland.serenna.core.Arc;
+import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.Node;
 
 /**
- * Exposes {@link Arc} functionalities.
+ * Exposes {@link Connection} functionalities.
  * 
  */
 public class ArcTest
 {
-	private static void assertHasSingleItem(Iterable<Arc> inputArcs, Arc arc)
+	private static void assertHasSingleItem(Iterable<Connection> inputArcs, Connection arc)
 	{
-		Iterator<Arc> inputArcsIter = inputArcs.iterator();
+		Iterator<Connection> inputArcsIter = inputArcs.iterator();
 		Assert.assertTrue(inputArcsIter.hasNext());
 		Assert.assertEquals(arc, inputArcsIter.next());
 		Assert.assertFalse(inputArcsIter.hasNext());
@@ -47,7 +47,7 @@ public class ArcTest
 		MockNode node0 = new MockNode("input");
 		MockNode node1 = new MockNode("output");
 		// Test
-		Arc arc = new Arc(node0, node1);
+		Connection arc = new Connection(node0, node1);
 		// Assertions
 		Assert.assertEquals(node0, arc.getInputNode());
 		Assert.assertEquals(node1, arc.getOutputNode());
