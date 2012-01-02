@@ -6,6 +6,10 @@ import org.junit.Test;
 import fr.hartland.serenna.core.activations.HeavisideActivationFunction;
 import fr.hartland.serenna.core.activations.IActivationFunction;
 
+/**
+ * Validate heaviside activation function core components methods.
+ * 
+ */
 public class HeavisideActivationFunctionTest {
 
 	/** tests the unit step function. */

@@ -1,45 +1,27 @@
 package fr.hartland.serenna.core.activations;
 
-import org.junit.Ignore;
+import org.junit.Assert;
 import org.junit.Test;
 
-public class LinearActivationFunctionTest {
+/**
+ * Validate linear activation function core components methods.
+ * 
+ */
+public class LinearActivationFunctionTest
+{
 
-	/**
-	 * Benchmark testing on calculation optimizations
-	 */
-	@Ignore
+	/** tests the unit step function. */
 	@Test
-	public void testComputeValue()
+	public void testUnitStepFunction()
 	{
-		// LinearActivationFunction function = new LinearActivationFunction();
-		//
-		// Thread.sleep(1000);
-		// int times = Integer.MAX_VALUE;
-		// long timeClassicalMethod = 0;
-		// long timeOptimizedMethod = 0;
-		//
-		//
-		// {
-		// long startTime = System.nanoTime();
-		// for (int i = 0; i < times; i++)
-		// {
-		// function.computeValue(10.);
-		// }
-		// timeClassicalMethod = System.nanoTime() - startTime;
-		// }
-		// {
-		// long startTime = System.nanoTime();
-		// for (int i = 0; i < times; i++)
-		// {
-		// function.compareComputeValue(10.);
-		// }
-		// timeOptimizedMethod = System.nanoTime() - startTime;
-		// }
-		// System.out.println(timeClassicalMethod / 1000000000.);
-		// System.out.println(timeOptimizedMethod / 1000000000.);
-		//
-		// Assert.assertTrue(timeClassicalMethod < timeOptimizedMethod);
+		// Setup
+		IActivationFunction function = new LinearActivationFunction();
+		// Tests
+		Assert.assertEquals(1, function.computeValue(1), 10E-6);
+		Assert.assertEquals(1, function.computeValue(1), 10E-6);
+		Assert.assertEquals(100, function.computeValue(100), 10E-6);
+		Assert.assertEquals(-1, function.computeValue(-1), 10E-6);
+		Assert.assertEquals(-100, function.computeValue(-100), 10E-6);
 	}
 
 }
