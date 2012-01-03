@@ -1,5 +1,8 @@
 package fr.hartland.serenna.core;
 
+import fr.hartland.serenna.core.neurons.IInputNeuron;
+import fr.hartland.serenna.core.neurons.IOutputNeuron;
+
 /**
  * A connection provide a link from one node to another. The connection role is to convey values changed or unchanged (e.g. a
  * weighted connection).
@@ -8,8 +11,8 @@ package fr.hartland.serenna.core;
 public class Connection
 {
 
-	private Node inputNode;
-	private Node outputNode;
+	private IInputNeuron inputNode;
+	private IOutputNeuron outputNode;
 
 	/**
 	 * Default constructor. An arc goes from one node to another.
@@ -19,7 +22,7 @@ public class Connection
 	 * @param outputNode
 	 *            the destination node to get the value conducted by the arc.
 	 */
-	public Connection(Node inputNode, Node outputNode)
+	public Connection(IInputNeuron inputNode, IOutputNeuron outputNode)
 	{
 		this.inputNode = inputNode;
 		this.outputNode = outputNode;
@@ -33,7 +36,7 @@ public class Connection
 	 * 
 	 * @return the input node.
 	 */
-	public Node getInputNode()
+	public IInputNeuron getInputNode()
 	{
 		return inputNode;
 	}
@@ -43,15 +46,15 @@ public class Connection
 	 * 
 	 * @return the output node.
 	 */
-	public Node getOutputNode()
+	public IOutputNeuron getOutputNode()
 	{
 		return outputNode;
 	}
 
 	/**
-	 * Returns the value, changed or not, from the input neuron.
+	 * Returns the value contained within the node if any; else return default value.
 	 * 
-	 * @return the value from the input neuron via the arc.
+	 * @return value computed during computation.
 	 */
 	public double getValue()
 	{

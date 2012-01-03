@@ -1,12 +1,18 @@
-package fr.hartland.serenna.core;
+package fr.hartland.serenna.core.neurons;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.activations.IActivationFunction;
 
 /**
  * Exposes core functionalities for a neuronal node.
  * 
  */
-public class Neuron extends Node {
+public class HiddenNeuron extends InputNeuron
+{
+	private final List<Connection> inputs;
 
 	/** The activation function */
 	private IActivationFunction activationFunction;
@@ -21,21 +27,32 @@ public class Neuron extends Node {
 	 * @param activationFunction
 	 *            the activation function associated to the neuron.
 	 */
-	public Neuron(String name, IActivationFunction activationFunction)
+	public HiddenNeuron(String name, IActivationFunction activationFunction)
 	{
 		super(name);
 		this.activationFunction = activationFunction;
+		this.inputs = new ArrayList<Connection>();
 	}
 
 	/**
-	 * Default constructor.
+	 * Append an input connection connection. The actual node become the output target for the connection.
 	 * 
-	 * @param name
-	 *            neuron name non unique identifier.
+	 * @param input
+	 *            the input connection connection.
 	 */
-	public Neuron(String name)
+	public void addInput(Connection input)
 	{
-		super(name);
+		this.inputs.add(input);
+	}
+
+	/**
+	 * Returns the input connections defined for the current node.
+	 * 
+	 * @return the input connections.
+	 */
+	public Iterable<Connection> getInputConnections()
+	{
+		return inputs;
 	}
 
 	@Override

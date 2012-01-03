@@ -1,7 +1,8 @@
 package fr.hartland.serenna.core.connection;
 
 import fr.hartland.serenna.core.Connection;
-import fr.hartland.serenna.core.Node;
+import fr.hartland.serenna.core.neurons.IInputNeuron;
+import fr.hartland.serenna.core.neurons.IOutputNeuron;
 
 /**
  * A weighted arc is an arc altering the value conducted from input neuron to output neuron via an multiplicative weight. A weight
@@ -21,7 +22,7 @@ public class WeightedConnection extends Connection
 	 * @param weight
 	 *            the arc weight to apply to value incoming from input node.
 	 */
-	public WeightedConnection(Node inputNode, Node outputNode, double weight)
+	public WeightedConnection(IInputNeuron inputNode, IOutputNeuron outputNode, double weight)
 	{
 		super(inputNode, outputNode);
 		this.weight = weight;
