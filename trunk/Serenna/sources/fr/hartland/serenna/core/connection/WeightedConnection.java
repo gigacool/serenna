@@ -39,7 +39,7 @@ public class WeightedConnection extends Connection
 	}
 
 	@Override
-	public double getValue()
+	public Double getValue()
 	{
 		return weight * super.getValue();
 	}

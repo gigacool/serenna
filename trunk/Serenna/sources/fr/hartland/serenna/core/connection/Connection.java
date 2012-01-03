@@ -52,8 +52,8 @@ public class Connection
 	 * 
 	 * @return value computed during computation.
 	 */
-	public double getValue()
+	public Double getValue()
 	{
-		return inputNode.getValue();
+		return (Double) inputNode.getValue();
 	}
 }

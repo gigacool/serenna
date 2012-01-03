@@ -4,7 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import fr.hartland.serenna.core.INode;
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
 
@@ -18,7 +17,7 @@ public class NeuronTest
 	public void testSingleNeuron()
 	{
 		// Setup
-		INode neuron = new Neuron("testNeuron", new LinearActivationFunction());
+		Neuron neuron = new Neuron("testNeuron", new LinearActivationFunction());
 		// Test
 		neuron.compute();
 		// Assertions
@@ -31,7 +30,7 @@ public class NeuronTest
 	{
 		// Setup
 		InputNeuron in = new InputNeuron("inputNeuron");
-		IOutputNeuron out = new Neuron("testNeuron", new LinearActivationFunction());
+		Neuron out = new Neuron("testNeuron", new LinearActivationFunction());
 		in.connect(out, new Connection(in, out));
 
 		in.setValue(10);

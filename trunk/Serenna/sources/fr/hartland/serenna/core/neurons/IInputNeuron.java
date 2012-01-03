@@ -26,4 +26,7 @@ public interface IInputNeuron extends INode
 	 */
 	void connect(IOutputNeuron outputNode, Connection connection);
 
+	@Override
+	Double getValue();
+	
 }

@@ -50,7 +50,7 @@ public class InputNeuron extends Node implements IInputNeuron
 	}
 
 	@Override
-	public double getValue()
+	public Double getValue()
 	{
 		return value;
 	}

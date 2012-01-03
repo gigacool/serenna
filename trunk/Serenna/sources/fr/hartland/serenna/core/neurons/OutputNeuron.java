@@ -75,7 +75,7 @@ public class OutputNeuron extends Node implements IOutputNeuron
 	}
 
 	@Override
-	public double getValue()
+	public Double getValue()
 	{
 		return value;
 	}
