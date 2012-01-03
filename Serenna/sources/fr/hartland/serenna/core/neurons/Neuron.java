@@ -109,4 +109,13 @@ public class Neuron extends Node implements IInputNeuron, IOutputNeuron
 		return value;
 	}
 
+	@Override
+	public void clear()
+	{
+		computed = false;
+		for(Connection connection:getInputConnections())
+		{
+			connection.getInputNode().clear();
+		}
+	}
 }

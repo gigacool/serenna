@@ -70,6 +70,11 @@ public class NeuralNetwork extends Node
 		{
 			inputNodes.get(i).setValue(values[i]);
 		}
+		// clean compute state within networks.
+		for (IOutputNeuron neuron : outputNodes)
+		{
+			neuron.clear();
+		}
 	}
 
 	/**
@@ -92,6 +97,15 @@ public class NeuralNetwork extends Node
 	public void addOutput(OutputNeuron out)
 	{
 		outputNodes.add(out);
+	}
+
+	@Override
+	public void clear()
+	{
+		for (IOutputNeuron neuron : outputNodes)
+		{
+			neuron.clear();
+		}
 	}
 
 }

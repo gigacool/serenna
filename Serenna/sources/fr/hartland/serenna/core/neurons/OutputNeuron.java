@@ -80,4 +80,13 @@ public class OutputNeuron extends Node implements IOutputNeuron
 		return value;
 	}
 
+	@Override
+	public void clear()
+	{
+		computed = false;
+		for(Connection connection:getInputConnections())
+		{
+			connection.getInputNode().clear();
+		}
+	}
 }

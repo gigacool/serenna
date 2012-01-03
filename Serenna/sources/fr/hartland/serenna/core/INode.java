@@ -16,5 +16,9 @@ public interface INode
 	 * @return value computed during computation.
 	 */
 	Object getValue();
-	
+
+	/**
+	 * Resets node state in between computes.
+	 */
+	void clear();
 }
