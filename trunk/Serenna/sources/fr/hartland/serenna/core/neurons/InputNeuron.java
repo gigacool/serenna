@@ -67,10 +67,15 @@ public class InputNeuron extends Node implements IInputNeuron
 	}
 
 	@Override
+	public void clear()
+	{
+		// NOP
+	}
+
+	@Override
 	public void compute()
 	{
 		// NOP -- keep the input value intact
 	}
-
 
 }
