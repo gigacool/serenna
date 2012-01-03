@@ -3,9 +3,9 @@ package fr.hartland.serenna.core.neurons;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.Node;
 import fr.hartland.serenna.core.activations.IActivationFunction;
+import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Defines a specific output neuron. An output neuron takes values from its inputs and processes it so it can be fetched outside

@@ -1,7 +1,7 @@
 package fr.hartland.serenna.core.neurons;
 
-import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.INode;
+import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Defines a specific output neuron. An output neuron fetches values from its inputs.
