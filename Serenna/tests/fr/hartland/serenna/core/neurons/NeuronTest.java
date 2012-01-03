@@ -6,36 +6,38 @@ import org.junit.Test;
 
 import fr.hartland.serenna.core.INode;
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
+import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Test the neuron class functionalities.
  */
 public class NeuronTest
 {
-
 	/** test a neuron compute with no inputs */
 	@Test
 	public void testSingleNeuron()
 	{
 		// Setup
-		INode neuron = new HiddenNeuron("testNeuron", new LinearActivationFunction());
+		INode neuron = new Neuron("testNeuron", new LinearActivationFunction());
 		// Test
 		neuron.compute();
 		// Assertions
 		Assert.assertEquals(0, neuron.getValue(), 10E-6);
 	}
 
-	/** test a neuron compute with one single input */
+	/** test a neuron having an input neuron providing a value */
 	@Test
-	public void testSingleNeuronWithValueSet()
+	public void testNeuronSetup()
 	{
 		// Setup
-		HiddenNeuron neuron = new HiddenNeuron("testNeuron", new LinearActivationFunction());
-		neuron.setValue(10);
-		// Test
-		neuron.compute();
-		// Assertions
-		Assert.assertEquals(0, neuron.getValue(), 10E-6);
-	}
+		InputNeuron in = new InputNeuron("inputNeuron");
+		IOutputNeuron out = new Neuron("testNeuron", new LinearActivationFunction());
+		in.connect(out, new Connection(in, out));
 
+		in.setValue(10);
+		// Test
+		out.compute();
+		// Assertions
+		Assert.assertEquals(10, out.getValue(), 10E-6);
+	}
 }

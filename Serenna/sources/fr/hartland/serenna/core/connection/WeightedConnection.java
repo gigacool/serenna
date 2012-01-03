@@ -1,6 +1,5 @@
 package fr.hartland.serenna.core.connection;
 
-import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.neurons.IInputNeuron;
 import fr.hartland.serenna.core.neurons.IOutputNeuron;
 

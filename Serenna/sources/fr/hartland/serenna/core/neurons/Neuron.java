@@ -3,9 +3,9 @@ package fr.hartland.serenna.core.neurons;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.Node;
 import fr.hartland.serenna.core.activations.IActivationFunction;
+import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Exposes core functionalities for a neuronal node.
@@ -37,6 +37,12 @@ public class Neuron extends Node implements IInputNeuron, IOutputNeuron
 		this.inputs = new ArrayList<Connection>();
 		this.outputs = new ArrayList<Connection>();
 		this.activationFunction = activationFunction;
+	}
+
+	@Override
+	public void connect(IOutputNeuron outputNode, Connection connection)
+	{
+		NeuronHelper.connect(this, outputNode, connection);
 	}
 
 	/**

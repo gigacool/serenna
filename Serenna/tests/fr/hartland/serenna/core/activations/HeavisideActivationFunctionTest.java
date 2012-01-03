@@ -10,8 +10,8 @@ import fr.hartland.serenna.core.activations.IActivationFunction;
  * Validate heaviside activation function core components methods.
  * 
  */
-public class HeavisideActivationFunctionTest {
-
+public class HeavisideActivationFunctionTest
+{
 	/** tests the unit step function. */
 	@Test
 	public void testUnitStepFunction()
@@ -25,5 +25,4 @@ public class HeavisideActivationFunctionTest {
 		Assert.assertEquals(0, function.computeValue(-1), 10E-6);
 		Assert.assertEquals(0, function.computeValue(-100), 10E-6);
 	}
-
 }

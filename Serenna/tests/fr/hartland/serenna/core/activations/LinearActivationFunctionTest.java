@@ -9,7 +9,6 @@ import org.junit.Test;
  */
 public class LinearActivationFunctionTest
 {
-
 	/** tests the unit step function. */
 	@Test
 	public void testUnitStepFunction()
@@ -23,5 +22,4 @@ public class LinearActivationFunctionTest
 		Assert.assertEquals(-1, function.computeValue(-1), 10E-6);
 		Assert.assertEquals(-100, function.computeValue(-100), 10E-6);
 	}
-
 }

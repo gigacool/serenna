@@ -16,4 +16,5 @@ public interface INode
 	 * @return value computed during computation.
 	 */
 	double getValue();
+	
 }

@@ -3,8 +3,8 @@ package fr.hartland.serenna.core.neurons;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hartland.serenna.core.Connection;
 import fr.hartland.serenna.core.Node;
+import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Defines a specific input neuron. An input neuron takes a value as an input and return it to its outgoing connections.
@@ -25,6 +25,12 @@ public class InputNeuron extends Node implements IInputNeuron
 	{
 		super(name);
 		this.outputs = new ArrayList<Connection>();
+	}
+
+	@Override
+	public void connect(IOutputNeuron outputNode, Connection connection)
+	{
+		NeuronHelper.connect(this, outputNode, connection);
 	}
 
 	@Override
@@ -65,5 +71,6 @@ public class InputNeuron extends Node implements IInputNeuron
 	{
 		// NOP -- keep the input value intact
 	}
+
 
 }
