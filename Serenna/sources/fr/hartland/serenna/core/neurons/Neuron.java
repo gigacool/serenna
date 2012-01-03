@@ -104,7 +104,7 @@ public class Neuron extends Node implements IInputNeuron, IOutputNeuron
 	}
 
 	@Override
-	public double getValue()
+	public Double getValue()
 	{
 		return value;
 	}

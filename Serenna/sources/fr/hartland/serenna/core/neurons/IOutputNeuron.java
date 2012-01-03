@@ -15,4 +15,7 @@ public interface IOutputNeuron extends INode
 	 *            the input connection connection.
 	 */
 	void addInput(Connection input);
+	
+	@Override
+	Double getValue();
 }
