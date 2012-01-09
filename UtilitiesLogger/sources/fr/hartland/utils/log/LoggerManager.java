@@ -3,8 +3,7 @@ package fr.hartland.utils.log;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-
-import fr.hartland.utils.log.ILogger.Level;
+import java.util.logging.Level;
 
 /**
  * Provides uniform mean to create file targeted loggers.
@@ -13,7 +12,7 @@ import fr.hartland.utils.log.ILogger.Level;
 public class LoggerManager {
 
 	private static Map<String, FileLogger> fileLoggers = new HashMap<String, FileLogger>();
-	private static ConsoleLogger console = new ConsoleLogger(Level.DEBUG);
+	private static ConsoleLogger console = new ConsoleLogger(ILogger.DEBUG);
 
 	/**
 	 * Builds or reuse the console logger. Change the logger level if logger
@@ -23,8 +22,7 @@ public class LoggerManager {
 	 *            the logging level.
 	 * @return the console logger.
 	 */
-	public static ILogger buildConsoleLogger(Level level)
-	{
+	public static ILogger buildConsoleLogger(short level) {
 		console.setLevel(level);
 		return console;
 	}
@@ -41,8 +39,8 @@ public class LoggerManager {
 	 * @throws FileNotFoundException
 	 *             if file is not found.
 	 */
-	public static ILogger buildFileLogger(Level level, String filePath) throws FileNotFoundException
-	{
+	public static ILogger buildFileLogger(short level, String filePath)
+			throws FileNotFoundException {
 		return buildFileLogger(level, filePath, false);
 	}
 
@@ -61,12 +59,10 @@ public class LoggerManager {
 	 * @throws FileNotFoundException
 	 *             if file is not found.
 	 */
-	public static ILogger buildFileLogger(Level level, String filePath, boolean append) throws FileNotFoundException
-	{
-		synchronized (fileLoggers)
-		{
-			if (fileLoggers.containsKey(filePath))
-			{
+	public static ILogger buildFileLogger(short level, String filePath,
+			boolean append) throws FileNotFoundException {
+		synchronized (fileLoggers) {
+			if (fileLoggers.containsKey(filePath)) {
 				FileLogger logger = fileLoggers.get(filePath);
 				logger.setLevel(level);
 				return logger;

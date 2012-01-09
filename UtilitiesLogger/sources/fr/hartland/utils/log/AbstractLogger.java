@@ -6,25 +6,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * The abstract logger provides core functionalities common to any {@link ILogger} implementation.
+ * The abstract logger provides core functionalities common to any
+ * {@link ILogger} implementation.
  */
-abstract class AbstractLogger implements ILogger
-{
+abstract class AbstractLogger implements ILogger {
 
 	private final PrintStream out;
-	private Level level;
+	private short level;
 
-	protected static String lineSeparator = System.getProperty("line.separator");
-	protected static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	protected static String lineSeparator = System
+			.getProperty("line.separator");
+	protected static DateFormat dateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
 
-	protected AbstractLogger(Level level, PrintStream out)
-	{
+	protected AbstractLogger(short level, PrintStream out) {
 		this.out = out;
 		this.level = level;
 	}
 
-	protected PrintStream getOut()
-	{
+	protected PrintStream getOut() {
 		return out;
 	}
 
@@ -34,109 +34,83 @@ abstract class AbstractLogger implements ILogger
 	 * @param level
 	 *            logging level.
 	 */
-	public void setLevel(Level level)
-	{
-		if (level == this.level)
-		{
+	public void setLevel(short level) {
+		if (level == this.level) {
 			return;
 		}
 		debug("Changing logging level from " + this.level + " to " + level);
-		Level oldLevel = this.level;
+		short oldLevel = this.level;
 		this.level = level;
 		debug("Changied logging level from " + oldLevel + " to " + this.level);
-
 	}
 
-	protected String buildFormattedMessage(Level messageLevel, String message)
-	{
+	public String getLevel() {
+		return getLevel(level);
+	}
+
+	public String getLevel(short messageLevel) {
+		switch (messageLevel) {
+		case OFF:
+			return "OFF";
+		case FATAL:
+			return "FATAL";
+		case ERROR:
+			return "ERROR";
+		case WARNING:
+			return "WARNING";
+		case INFO:
+			return "INFO";
+		case DEBUG:
+			return "DEBUG";
+		}
+		return "LEVEL INCORRECTLY SET";
+	}
+
+	protected String buildFormattedMessage(short messageLevel, String message) {
 		StringBuilder builder = new StringBuilder();
 		{
 			builder.append(dateFormat.format(new Date()));
 			builder.append(' ');
-			builder.append(messageLevel.toString());
+			builder.append(getLevel(messageLevel));
 			builder.append("\t: ");
-			builder.append(message.replaceAll("[\\r\\n]+", lineSeparator + '\t'));
+			builder.append(message
+					.replaceAll("[\\r\\n]+", lineSeparator + '\t'));
 		}
 		return builder.toString();
 	}
 
 	@Override
-	public void fatal(String message)
-	{
-		switch (level) {
-		case OFF:
-			break;
-		case FATAL:
-		case ERROR:
-		case WARNING:
-		case INFO:
-		case DEBUG:
-			out.println(buildFormattedMessage(Level.FATAL, message));
-			break;
+	public void fatal(String message) {
+		if (level >= FATAL) {
+			out.println(buildFormattedMessage(FATAL, message));
 		}
 	}
 
 	@Override
-	public void error(String message)
-	{
-		switch (level) {
-		case OFF:
-		case FATAL:
-			break;
-		case ERROR:
-		case WARNING:
-		case INFO:
-		case DEBUG:
-			out.println(buildFormattedMessage(Level.ERROR, message));
-			break;
+	public void error(String message) {
+		if (level >= ERROR) {
+			out.println(buildFormattedMessage(ERROR, message));
 		}
 	}
 
 	@Override
-	public void warning(String message)
-	{
-		switch (level) {
-		case OFF:
-		case FATAL:
-		case ERROR:
-			break;
-		case WARNING:
-		case INFO:
-		case DEBUG:
-			out.println(buildFormattedMessage(Level.WARNING, message));
-			break;
+	public void warning(String message) {
+		if (level >= WARNING) {
+			out.println(buildFormattedMessage(WARNING, message));
 		}
 	}
 
 	@Override
-	public void info(String message)
-	{
-		switch (level) {
-		case OFF:
-		case FATAL:
-		case ERROR:
-		case WARNING:
-			break;
-		case INFO:
-		case DEBUG:
-			out.println(buildFormattedMessage(Level.INFO, message));
-			break;
+	public void info(String message) {
+		if (level >= INFO) {
+			out.println(buildFormattedMessage(INFO, message));
 		}
 	}
 
 	@Override
-	public void debug(String message)
-	{
-		switch (level) {
-		case OFF:
-		case FATAL:
-		case ERROR:
-		case WARNING:
-		case INFO:
-			break;
-		case DEBUG:
-			out.println(buildFormattedMessage(Level.DEBUG, message));
-			break;
+	public void debug(String message) {
+		if (level >= DEBUG) {
+			out.println(buildFormattedMessage(DEBUG, message));
 		}
 	}
 

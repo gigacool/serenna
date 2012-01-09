@@ -6,8 +6,6 @@ import java.io.PrintStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.hartland.utils.log.ILogger.Level;
-
 /**
  * Provides minimal tests for the abstract logger implementation.
  */
@@ -18,11 +16,11 @@ public class AbstractLoggerTest {
 	 * parameter is set to off.
 	 */
 	@Test
-	public void testLoggerOff()
-	{
+	public void testLoggerOff() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.OFF, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.OFF,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -45,11 +43,11 @@ public class AbstractLoggerTest {
 	 * error.
 	 */
 	@Test
-	public void testLoggerFatal()
-	{
+	public void testLoggerFatal() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.FATAL, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.FATAL,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -71,11 +69,11 @@ public class AbstractLoggerTest {
 	 * testLoggerError make sure no data is printed with lower level than error.
 	 */
 	@Test
-	public void testLoggerError()
-	{
+	public void testLoggerError() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.ERROR, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.ERROR,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -98,11 +96,11 @@ public class AbstractLoggerTest {
 	 * warning.
 	 */
 	@Test
-	public void testLoggerWarning()
-	{
+	public void testLoggerWarning() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.WARNING, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.WARNING,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -124,11 +122,11 @@ public class AbstractLoggerTest {
 	 * testLoggerInfo make sure no data is printed with lower level than info.
 	 */
 	@Test
-	public void testLoggerInfo()
-	{
+	public void testLoggerInfo() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.INFO, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.INFO,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
@@ -150,11 +148,11 @@ public class AbstractLoggerTest {
 	 * testLoggerDebug make sure every data is printed whatever their level.
 	 */
 	@Test
-	public void testLoggerDebug()
-	{
+	public void testLoggerDebug() {
 		// Setup
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AbstractLogger logger = new AbstractLogger(Level.DEBUG, new PrintStream(out)) {
+		AbstractLogger logger = new AbstractLogger(ILogger.DEBUG,
+				new PrintStream(out)) {
 			// NOP
 		};
 		// Test
