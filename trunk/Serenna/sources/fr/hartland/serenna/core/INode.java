@@ -2,6 +2,7 @@ package fr.hartland.serenna.core;
 
 /**
  * Generic root interface for all possible neural network nodes.
+ * TODO : refactor
  */
 public interface INode
 {
