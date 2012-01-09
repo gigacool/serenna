@@ -9,12 +9,12 @@ import java.io.PrintStream;
  */
 public class FileLogger extends AbstractLogger {
 
-	protected FileLogger(Level level, String filePath) throws FileNotFoundException
+	protected FileLogger(short level, String filePath) throws FileNotFoundException
 	{
 		this(level, filePath, false);
 	}
 
-	protected FileLogger(Level level, String filePath, boolean append) throws FileNotFoundException
+	protected FileLogger(short level, String filePath, boolean append) throws FileNotFoundException
 	{
 		super(level, new PrintStream(new FileOutputStream(filePath, append), true));
 	}

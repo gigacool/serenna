@@ -11,17 +11,17 @@ public class ConsoleLogger extends AbstractLogger {
 	 * @param level
 	 *            logging level.
 	 */
-	protected ConsoleLogger(Level level)
+	protected ConsoleLogger(short level)
 	{
 		super(level, System.out);
 	}
 
 	@Override
-	protected String buildFormattedMessage(Level messageLevel, String message)
+	protected String buildFormattedMessage(short messageLevel, String message)
 	{
 		StringBuilder builder = new StringBuilder();
 		{
-			builder.append(messageLevel.toString());
+			builder.append(getLevel(messageLevel));
 			builder.append("\t: ");
 			builder.append(message.replaceAll("[\\r\\n]+", lineSeparator + '\t'));
 		}

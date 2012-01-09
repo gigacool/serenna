@@ -4,25 +4,20 @@ package fr.hartland.utils.log;
  * General logging interface.
  * 
  */
-public interface ILogger
-{
-	/**
-	 * Logging detail level.
-	 */
-	public enum Level {
-		/** Logging turned off */
-		OFF,
-		/** Log only fatal errors */
-		FATAL,
-		/** log up to error level */
-		ERROR,
-		/** log up to warnings level */
-		WARNING,
-		/** log up to info level */
-		INFO,
-		/** log everything up to debug level */
-		DEBUG;
-	}
+public interface ILogger {
+
+	/** Logging turned off */
+	short OFF = 1 << 0;
+	/** Log only fatal errors */
+	short FATAL = 1 << 1;
+	/** log up to error level */
+	short ERROR = 1 << 2;
+	/** log up to warnings level */
+	short WARNING = 1 << 3;
+	/** log up to info level */
+	short INFO = 1 << 4;
+	/** log everything up to debug level */
+	short DEBUG = 1 << 5;
 
 	/**
 	 * Log a fatal error message.
