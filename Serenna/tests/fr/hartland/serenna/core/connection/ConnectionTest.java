@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
-import fr.hartland.serenna.core.neurons.InputNeuron;
-import fr.hartland.serenna.core.neurons.OutputNeuron;
+import fr.hartland.serenna.core.neuron.InputNeuron;
+import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
  * Exposes {@link Connection} functionalities.
