@@ -2,6 +2,9 @@ package fr.hartland.serenna.core.neurons;
 
 import fr.hartland.serenna.core.activations.IActivationFunction;
 
+/**
+ * Provide hidden neuron specific behavior (i.e. typical neuron behavior as opposed to input or output neurons).
+ */
 public class HiddenNeuron extends Neuron
 {
 	private static int neuronIdentifier = 0;
