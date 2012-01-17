@@ -3,9 +3,8 @@ package fr.hartland.serenna.core;
 /**
  * Generic class for all possible neural network nodes.
  */
-public abstract class Node implements INode
+public abstract class Unit
 {
-
 	private final String name;
 
 	/**
@@ -14,19 +13,9 @@ public abstract class Node implements INode
 	 * @param name
 	 *            the node name.
 	 */
-	protected Node(String name)
+	protected Unit(String name)
 	{
 		this.name = name;
-	}
-
-	/**
-	 * Returns the node name.
-	 * 
-	 * @return the node name.
-	 */
-	public final String getName()
-	{
-		return name;
 	}
 
 	@Override
@@ -34,6 +23,11 @@ public abstract class Node implements INode
 	{
 		return '(' + name + ')';
 	}
+
+	/**
+	 * Given weighted input value(s) provided to the node, compute the output value.
+	 */
+	protected abstract void compute();
 
 
 }

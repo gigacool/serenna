@@ -1,59 +1,75 @@
 package fr.hartland.serenna.core.connection;
 
-import fr.hartland.serenna.core.neurons.IInputNeuron;
-import fr.hartland.serenna.core.neurons.IOutputNeuron;
+import fr.hartland.serenna.core.neurons.Neuron;
 
 /**
- * A connection provide a link from one node to another. The connection role is to convey values changed or unchanged (e.g. a
+ * A connection provide a link from one neuron to another. The connection role is to convey values changed or unchanged (e.g. a
  * weighted connection).
  * 
  */
 public class Connection
 {
-	private IInputNeuron inputNode;
-	private IOutputNeuron outputNode;
+	private Neuron inputNeuron;
+	private Neuron outputNeuron;
 
 	/**
-	 * Default constructor. An arc goes from one node to another.
+	 * Default constructor. An arc goes from one neuron to another.
 	 * 
-	 * @param inputNode
-	 *            the node providing value to the arc.
-	 * @param outputNode
-	 *            the destination node to get the value conducted by the arc.
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
 	 */
-	public Connection(IInputNeuron inputNode, IOutputNeuron outputNode)
+	protected Connection(Neuron inputNeuron, Neuron outputNeuron)
 	{
-		this.inputNode = inputNode;
-		this.outputNode = outputNode;
+		this.inputNeuron = inputNeuron;
+		this.outputNeuron = outputNeuron;
 	}
 
 	/**
-	 * Returns the arc input node.
+	 * Connection factory builder.
 	 * 
-	 * @return the input node.
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
+	 * @return the neuron properly set.
 	 */
-	public IInputNeuron getInputNode()
+	public static Connection buildConnection(Neuron inputNeuron, Neuron outputNeuron)
 	{
-		return inputNode;
+		Connection connection = new Connection(inputNeuron, outputNeuron);
+		inputNeuron.addOutput(connection);
+		outputNeuron.addInput(connection);
+		return connection;
 	}
 
 	/**
-	 * Returns the arc output node.
+	 * Returns the arc input neuron.
 	 * 
-	 * @return the output node.
+	 * @return the input neuron.
 	 */
-	public IOutputNeuron getOutputNode()
+	public Neuron getInputNeuron()
 	{
-		return outputNode;
+		return inputNeuron;
 	}
 
 	/**
-	 * Returns the value contained within the node if any; else return default value.
+	 * Returns the arc output neuron.
+	 * 
+	 * @return the output neuron.
+	 */
+	Neuron getOutputNeuron()
+	{
+		return outputNeuron;
+	}
+
+	/**
+	 * Returns the value contained within the neuron if any; else return default value.
 	 * 
 	 * @return value computed during computation.
 	 */
-	public Double getValue()
+	public double getValue()
 	{
-		return (Double) inputNode.getValue();
+		return inputNeuron.getValue();
 	}
 }
