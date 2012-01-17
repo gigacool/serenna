@@ -2,6 +2,11 @@ package fr.hartland.serenna.core.neurons;
 
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 
+/**
+ * Provide specific behavior components for input neurons as compared to typical neurons (linear activation function, visible
+ * ability to set its input value, etc.)
+ * 
+ */
 public class InputNeuron extends Neuron
 {
 	private static int neuronIdentifier = 0;

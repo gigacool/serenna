@@ -2,6 +2,10 @@ package fr.hartland.serenna.core.neurons;
 
 import fr.hartland.serenna.core.activations.IActivationFunction;
 
+/**
+ * Provide output neuron specific abilities as compared to typical neurons. 
+ *
+ */
 public class OutputNeuron extends Neuron
 {
 	private static int neuronIdentifier = 0;
