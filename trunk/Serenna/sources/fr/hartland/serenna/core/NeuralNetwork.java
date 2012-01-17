@@ -3,7 +3,6 @@ package fr.hartland.serenna.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hartland.serenna.core.neurons.IOutputNeuron;
 import fr.hartland.serenna.core.neurons.InputNeuron;
 import fr.hartland.serenna.core.neurons.OutputNeuron;
 
@@ -11,10 +10,10 @@ import fr.hartland.serenna.core.neurons.OutputNeuron;
  * Neural network class.
  * 
  */
-public class NeuralNetwork extends Node
+public class NeuralNetwork extends Unit
 {
-	private final List<InputNeuron> inputNodes;
-	private final List<IOutputNeuron> outputNodes;
+	private final List<InputNeuron> inputNeurons;
+	private final List<OutputNeuron> outputNeurons;
 
 	/**
 	 * Default constructor.
@@ -25,14 +24,22 @@ public class NeuralNetwork extends Node
 	public NeuralNetwork(String name)
 	{
 		super(name);
-		this.inputNodes = new ArrayList<InputNeuron>(1);
-		this.outputNodes = new ArrayList<IOutputNeuron>(1);
+		this.inputNeurons = new ArrayList<InputNeuron>(1);
+		this.outputNeurons = new ArrayList<OutputNeuron>(1);
+	}
+
+	/**
+	 * Default constructor.
+	 */
+	public NeuralNetwork()
+	{
+		this("network");
 	}
 
 	@Override
 	public void compute()
 	{
-		for (IOutputNeuron neuron : outputNodes)
+		for (OutputNeuron neuron : outputNeurons)
 		{
 			neuron.compute();
 		}
@@ -43,13 +50,12 @@ public class NeuralNetwork extends Node
 	 * 
 	 * @return values computed during computation.
 	 */
-	@Override
 	public double[] getValue()
 	{
-		double[] values = new double[outputNodes.size()];
+		double[] values = new double[outputNeurons.size()];
 		for (int i = 0; i < values.length; i++)
 		{
-			values[i] = outputNodes.get(i).getValue();
+			values[i] = outputNeurons.get(i).getValue();
 		}
 		return values;
 	}
@@ -61,17 +67,17 @@ public class NeuralNetwork extends Node
 	 */
 	public void setValue(int... values)
 	{
-		if (values.length != inputNodes.size())
+		if (values.length != inputNeurons.size())
 		{
-			throw new RuntimeException("Incompatible number of input values; expected " + inputNodes.size() + " values but had "
-					+ values.length);
+			throw new RuntimeException("Incompatible number of input values; expected " + inputNeurons.size()
+					+ " values but had " + values.length);
 		}
 		for (int i = 0; i < values.length; i++)
 		{
-			inputNodes.get(i).setValue(values[i]);
+			inputNeurons.get(i).setValue(values[i]);
 		}
-		// clean compute state within networks.
-		for (IOutputNeuron neuron : outputNodes)
+		// clean neurons
+		for (OutputNeuron neuron : outputNeurons)
 		{
 			neuron.clear();
 		}
@@ -85,7 +91,7 @@ public class NeuralNetwork extends Node
 	 */
 	public void addInput(InputNeuron in)
 	{
-		inputNodes.add(in);
+		inputNeurons.add(in);
 	}
 
 	/**
@@ -96,16 +102,7 @@ public class NeuralNetwork extends Node
 	 */
 	public void addOutput(OutputNeuron out)
 	{
-		outputNodes.add(out);
-	}
-
-	@Override
-	public void clear()
-	{
-		for (IOutputNeuron neuron : outputNodes)
-		{
-			neuron.clear();
-		}
+		outputNeurons.add(out);
 	}
 
 }

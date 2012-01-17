@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
+import fr.hartland.serenna.core.neurons.HiddenNeuron;
 import fr.hartland.serenna.core.neurons.InputNeuron;
-import fr.hartland.serenna.core.neurons.Neuron;
 import fr.hartland.serenna.core.neurons.OutputNeuron;
 
 /**
@@ -19,15 +19,15 @@ public class NeuralNetworkTest
 	{
 		NeuralNetwork network = new NeuralNetwork("network");
 		{
-			InputNeuron in = new InputNeuron("input");
-			Neuron hidden = new Neuron("hidden", new LinearActivationFunction());
-			OutputNeuron out = new OutputNeuron("output", new LinearActivationFunction());
+			InputNeuron input = new InputNeuron("input");
+			HiddenNeuron hidden = new HiddenNeuron("hidden", new LinearActivationFunction());
+			OutputNeuron output = new OutputNeuron("output", new LinearActivationFunction());
 
-			in.connect(hidden, new Connection(in, hidden));
-			hidden.connect(out, new Connection(hidden, out));
+			Connection.buildConnection(input, hidden);
+			Connection.buildConnection(hidden, output);
 
-			network.addInput(in);
-			network.addOutput(out);
+			network.addInput(input);
+			network.addOutput(output);
 		}
 		return network;
 	}

@@ -1,81 +1,40 @@
 package fr.hartland.serenna.core.neurons;
 
-import java.util.ArrayList;
-import java.util.List;
+import fr.hartland.serenna.core.activations.LinearActivationFunction;
 
-import fr.hartland.serenna.core.Node;
-import fr.hartland.serenna.core.connection.Connection;
-
-/**
- * Defines a specific input neuron. An input neuron takes a value as an input and return it to its outgoing connections.
- */
-public class InputNeuron extends Node implements IInputNeuron
+public class InputNeuron extends Neuron
 {
-	private final List<Connection> outputs;
-	/** the value calculated during a computation step. */
-	private double value;
+	private static int neuronIdentifier = 0;
 
 	/**
-	 * Default constructor. Each node can have an identifier (non necessarily unique).
-	 * 
-	 * @param name
-	 *            the neuron name identifier.
+	 * Default constructor.
 	 */
-	public InputNeuron(String name)
+	public InputNeuron()
 	{
-		super(name);
-		this.outputs = new ArrayList<Connection>();
-	}
-
-	@Override
-	public void connect(IOutputNeuron outputNode, Connection connection)
-	{
-		NeuronHelper.connect(this, outputNode, connection);
-	}
-
-	@Override
-	public void addOutput(Connection output)
-	{
-		this.outputs.add(output);
+		this("input:" + neuronIdentifier++);
 	}
 
 	/**
-	 * Returns the output connections defined for the current node.
+	 * Constructor with custom name.
 	 * 
-	 * @return the output connections.
+	 * @param identifier
+	 *            the neuron non necessarily unique identifier.
 	 */
-	protected Iterable<Connection> getOutputConnections()
+	public InputNeuron(String identifier)
 	{
-		return outputs;
+		super(identifier, new LinearActivationFunction());
 	}
 
 	@Override
-	public Double getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * Defines the node value.
-	 * 
-	 * @param value
-	 *            the value to set
-	 */
 	public void setValue(double value)
 	{
-		this.value = value;
+		super.setValue(value);
 	}
 
 	@Override
-	public void clear()
+	protected void compute()
 	{
 		// NOP
-	}
-
-	@Override
-	public void compute()
-	{
-		// NOP -- keep the input value intact
 	}
 
 }

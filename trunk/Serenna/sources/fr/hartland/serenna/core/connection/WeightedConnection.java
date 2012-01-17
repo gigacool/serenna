@@ -1,7 +1,6 @@
 package fr.hartland.serenna.core.connection;
 
-import fr.hartland.serenna.core.neurons.IInputNeuron;
-import fr.hartland.serenna.core.neurons.IOutputNeuron;
+import fr.hartland.serenna.core.neurons.Neuron;
 
 /**
  * A weighted arc is an arc altering the value conducted from input neuron to output neuron via an multiplicative weight. A weight
@@ -14,17 +13,36 @@ public class WeightedConnection extends Connection
 	/**
 	 * Default constructor. Builds a weighted arc.
 	 * 
-	 * @param inputNode
-	 *            the node providing value to the arc.
-	 * @param outputNode
-	 *            the destination node to get the value conducted by the arc.
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
 	 * @param weight
-	 *            the arc weight to apply to value incoming from input node.
+	 *            the arc weight to apply to value incoming from input neuron.
 	 */
-	public WeightedConnection(IInputNeuron inputNode, IOutputNeuron outputNode, double weight)
+	protected WeightedConnection(Neuron inputNeuron, Neuron outputNeuron, double weight)
 	{
-		super(inputNode, outputNode);
+		super(inputNeuron, outputNeuron);
 		this.weight = weight;
+	}
+
+	/**
+	 * Connection factory builder.
+	 * 
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
+	 * @param weight
+	 *            the arc weight to apply to value incoming from input neuron.
+	 * @return the neuron properly set.
+	 */
+	public static WeightedConnection buildConnection(Neuron inputNeuron, Neuron outputNeuron, double weight)
+	{
+		WeightedConnection connection = new WeightedConnection(inputNeuron, outputNeuron, weight);
+		inputNeuron.addOutput(connection);
+		outputNeuron.addInput(connection);
+		return connection;
 	}
 
 	/**
@@ -33,13 +51,13 @@ public class WeightedConnection extends Connection
 	 * @param weight
 	 *            the new arc weight.
 	 */
-	public void setWeight(double weight)
+	void setWeight(double weight)
 	{
 		this.weight = weight;
 	}
 
 	@Override
-	public Double getValue()
+	public double getValue()
 	{
 		return weight * super.getValue();
 	}

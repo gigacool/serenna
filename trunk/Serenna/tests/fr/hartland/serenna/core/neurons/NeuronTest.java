@@ -4,6 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import fr.hartland.serenna.core.activations.IActivationFunction;
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
 
@@ -12,12 +13,20 @@ import fr.hartland.serenna.core.connection.Connection;
  */
 public class NeuronTest
 {
+	private static Neuron buildAnonymousNeuron(String neuronName, IActivationFunction activationFunction)
+	{
+		Neuron neuron = new Neuron(neuronName, activationFunction) {
+			// NOP
+		};
+		return neuron;
+	}
+
 	/** test a neuron compute with no inputs */
 	@Test
 	public void testSingleNeuron()
 	{
 		// Setup
-		Neuron neuron = new Neuron("testNeuron", new LinearActivationFunction());
+		Neuron neuron = buildAnonymousNeuron("testNeuron", new LinearActivationFunction());
 		// Test
 		neuron.compute();
 		// Assertions
@@ -29,14 +38,14 @@ public class NeuronTest
 	public void testNeuronSetup()
 	{
 		// Setup
-		InputNeuron in = new InputNeuron("inputNeuron");
-		Neuron out = new Neuron("testNeuron", new LinearActivationFunction());
-		in.connect(out, new Connection(in, out));
-
-		in.setValue(10);
+		Neuron input = buildAnonymousNeuron("input", new LinearActivationFunction());
+		Neuron target = buildAnonymousNeuron("target", new LinearActivationFunction());
+		Connection.buildConnection(input, target);
+		input.setValue(10);
 		// Test
-		out.compute();
+		target.compute();
 		// Assertions
-		Assert.assertEquals(10, out.getValue(), 10E-6);
+		// only the input neuron being an actual InputNeuron will return 10 as its output value.
+		Assert.assertEquals(0, target.getValue(), 10E-6);
 	}
 }
