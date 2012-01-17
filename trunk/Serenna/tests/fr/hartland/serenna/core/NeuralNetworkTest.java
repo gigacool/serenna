@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
-import fr.hartland.serenna.core.neurons.HiddenNeuron;
-import fr.hartland.serenna.core.neurons.InputNeuron;
-import fr.hartland.serenna.core.neurons.OutputNeuron;
+import fr.hartland.serenna.core.neuron.HiddenNeuron;
+import fr.hartland.serenna.core.neuron.InputNeuron;
+import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
  * Exposes neural network functionalities.
