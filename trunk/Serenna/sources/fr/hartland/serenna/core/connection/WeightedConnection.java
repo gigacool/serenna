@@ -1,6 +1,6 @@
 package fr.hartland.serenna.core.connection;
 
-import fr.hartland.serenna.core.neurons.Neuron;
+import fr.hartland.serenna.core.neuron.Neuron;
 
 /**
  * A weighted arc is an arc altering the value conducted from input neuron to output neuron via an multiplicative weight. A weight
