@@ -1,6 +1,6 @@
 package fr.hartland.serenna.core.connection;
 
-import fr.hartland.serenna.core.neurons.Neuron;
+import fr.hartland.serenna.core.neuron.Neuron;
 
 /**
  * A connection provide a link from one neuron to another. The connection role is to convey values changed or unchanged (e.g. a

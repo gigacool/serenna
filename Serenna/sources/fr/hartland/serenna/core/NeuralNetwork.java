@@ -3,8 +3,8 @@ package fr.hartland.serenna.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hartland.serenna.core.neurons.InputNeuron;
-import fr.hartland.serenna.core.neurons.OutputNeuron;
+import fr.hartland.serenna.core.neuron.InputNeuron;
+import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
  * Neural network class.
