@@ -3,9 +3,6 @@ package fr.hartland.serenna.core.activations;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.hartland.serenna.core.activations.HeavisideActivationFunction;
-import fr.hartland.serenna.core.activations.IActivationFunction;
-
 /**
  * Validate heaviside activation function core components methods.
  * 

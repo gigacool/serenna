@@ -7,7 +7,6 @@ import org.junit.Test;
 import fr.hartland.serenna.core.activations.IActivationFunction;
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
-import fr.hartland.serenna.core.neuron.Neuron;
 
 /**
  * Test the neuron class functionalities.

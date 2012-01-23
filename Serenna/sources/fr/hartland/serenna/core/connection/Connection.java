@@ -1,5 +1,7 @@
 package fr.hartland.serenna.core.connection;
 
+import fr.hartland.serenna.core.neuron.HiddenNeuron;
+import fr.hartland.serenna.core.neuron.Layer;
 import fr.hartland.serenna.core.neuron.Neuron;
 
 /**
@@ -44,6 +46,60 @@ public class Connection
 	}
 
 	/**
+	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons from the
+	 * other layer.
+	 * 
+	 * @param source
+	 *            the source layer.
+	 * @param target
+	 *            the destination layer.
+	 */
+	public static void buildConnections(Layer<? extends Neuron> source, Layer<? extends Neuron> target)
+	{
+		for (Neuron sourceNeuron : source.getNeurons())
+		{
+			for (Neuron targetNeuron : target.getNeurons())
+			{
+				buildConnection(sourceNeuron, targetNeuron);
+			}
+		}
+	}
+
+	/**
+	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to target
+	 * neuron.
+	 * 
+	 * @param source
+	 *            the source layer.
+	 * @param target
+	 *            the destination neuron.
+	 */
+	public static void buildConnections(Layer<HiddenNeuron> source, HiddenNeuron target)
+	{
+		for (Neuron sourceNeuron : source.getNeurons())
+		{
+			buildConnection(sourceNeuron, target);
+		}
+	}
+
+	/**
+	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to source
+	 * neuron.
+	 * 
+	 * @param source
+	 *            the source neuron.
+	 * @param target
+	 *            the destination layer.
+	 */
+	public static void buildConnections(HiddenNeuron source, Layer<HiddenNeuron> target)
+	{
+		for (Neuron targetNeuron : target.getNeurons())
+		{
+			buildConnection(source, targetNeuron);
+		}
+	}
+
+	/**
 	 * Returns the arc input neuron.
 	 * 
 	 * @return the input neuron.
@@ -58,7 +114,7 @@ public class Connection
 	 * 
 	 * @return the output neuron.
 	 */
-	Neuron getOutputNeuron()
+	public Neuron getOutputNeuron()
 	{
 		return outputNeuron;
 	}
@@ -72,4 +128,5 @@ public class Connection
 	{
 		return inputNeuron.getValue();
 	}
+
 }

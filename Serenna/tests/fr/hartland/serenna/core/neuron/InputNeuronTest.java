@@ -4,8 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import fr.hartland.serenna.core.neuron.InputNeuron;
-
 /**
  * Exposes input neurons functionalities.
  * 
