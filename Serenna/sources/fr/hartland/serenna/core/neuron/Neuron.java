@@ -118,7 +118,7 @@ public abstract class Neuron extends Unit
 	 * 
 	 * @return the output connections.
 	 */
-	protected Iterable<Connection> getOutputConnections()
+	public Iterable<Connection> getOutputConnections()
 	{
 		return outputs;
 	}

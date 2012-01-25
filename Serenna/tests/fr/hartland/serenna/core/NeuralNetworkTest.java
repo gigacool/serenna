@@ -64,9 +64,61 @@ public class NeuralNetworkTest
 		{
 			Assert.assertEquals(1.0, output, 1E-6);
 		}
-
 	}
 
+
+	/**
+	 * countNumberOfNeurons computes the number of neurons within the network. 
+	 */
+	@Test
+	public void countNumberOfNeurons()
+	{
+		// Setup
+		NeuralNetwork network = new NeuralNetwork();
+		{
+			Layer<InputNeuron> inputLayer = Layer.buildInputLayer(10);
+			Layer<HiddenNeuron> firstLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
+			Layer<HiddenNeuron> secondLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
+			Layer<OutputNeuron> outputLayer = Layer.buildOutputLayer(10, new LinearActivationFunction());
+
+			WeightedConnection.buildConnections(inputLayer, firstLayer, 0.1);
+			WeightedConnection.buildConnections(firstLayer, secondLayer, 0.1);
+			WeightedConnection.buildConnections(secondLayer, outputLayer, 0.1);
+
+			network.setInputLayer(inputLayer);
+			network.setOutputLayer(outputLayer);
+		}
+		// Test
+		Assert.assertEquals(40, network.size());
+	}
+	
+	/**
+	 * countNumberOfNeurons computes the number of neurons within the network. 
+	 */
+	@Test
+	public void countNumberOfNeuronsSimpleTopo()
+	{
+		// Setup
+		NeuralNetwork network = new NeuralNetwork();
+		{
+			InputNeuron input = new InputNeuron("input");
+			HiddenNeuron hidden1 = new HiddenNeuron("hidden1", new LinearActivationFunction());
+			HiddenNeuron hidden2 = new HiddenNeuron("hidden2", new LinearActivationFunction());
+			OutputNeuron output = new OutputNeuron("output", new LinearActivationFunction());
+
+			Connection.buildConnection(input, hidden1);
+			Connection.buildConnection(input, hidden2);
+			Connection.buildConnection(hidden1, hidden2);
+			Connection.buildConnection(hidden1, output);
+			Connection.buildConnection(hidden2, output);
+
+			network.addInput(input);
+			network.addOutput(output);
+		}
+		// Test
+		Assert.assertEquals(4, network.size());
+	}
+	
 	/**
 	 * simpleNetworkComputation
 	 */
