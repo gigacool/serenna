@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hartland.serenna.core.neuron.InputNeuron;
+import fr.hartland.serenna.core.neuron.Layer;
 import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
@@ -103,6 +104,36 @@ public class NeuralNetwork extends Unit
 	public void addOutput(OutputNeuron out)
 	{
 		outputNeurons.add(out);
+	}
+
+	/**
+	 * Sets the input neurons from the input layer.
+	 * 
+	 * @param inputLayer
+	 *            the layer containing network input neurons.
+	 */
+	public void setInputLayer(Layer<InputNeuron> inputLayer)
+	{
+		inputNeurons.clear();
+		for (InputNeuron neuron : inputLayer.getNeurons())
+		{
+			addInput(neuron);
+		}
+	}
+
+	/**
+	 * Sets the output neurons from the output layer.
+	 * 
+	 * @param outputLayer
+	 *            the layer containing network output neurons.
+	 */
+	public void setOutputLayer(Layer<OutputNeuron> outputLayer)
+	{
+		outputNeurons.clear();
+		for (OutputNeuron neuron : outputLayer.getNeurons())
+		{
+			addOutput(neuron);
+		}
 	}
 
 }
