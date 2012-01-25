@@ -1,10 +1,14 @@
 package fr.hartland.serenna.core;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import fr.hartland.serenna.core.connection.Connection;
 import fr.hartland.serenna.core.neuron.InputNeuron;
 import fr.hartland.serenna.core.neuron.Layer;
+import fr.hartland.serenna.core.neuron.Neuron;
 import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
@@ -133,6 +137,35 @@ public class NeuralNetwork extends Unit
 		for (OutputNeuron neuron : outputLayer.getNeurons())
 		{
 			addOutput(neuron);
+		}
+	}
+
+	/**
+	 * Computes the number of neurons connected within the network.
+	 * 
+	 * @return the number of neurons.
+	 */
+	public int size()
+	{
+		Set<Neuron> neurons = new HashSet<Neuron>();
+		for (Neuron neuron : inputNeurons)
+		{
+			neurons.add(neuron);
+			subSize(neurons, neuron);
+		}
+		return neurons.size();
+	}
+
+	private void subSize(Set<Neuron> neurons, Neuron neuron)
+	{
+		for (Connection connection : neuron.getOutputConnections())
+		{
+			Neuron target = connection.getOutputNeuron();
+			if (!neurons.contains(target))
+			{
+				neurons.add(target);
+				subSize(neurons, target);
+			}
 		}
 	}
 
