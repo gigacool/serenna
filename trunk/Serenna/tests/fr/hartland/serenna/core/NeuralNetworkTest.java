@@ -9,6 +9,7 @@ import fr.hartland.serenna.core.connection.WeightedConnection;
 import fr.hartland.serenna.core.neuron.HiddenNeuron;
 import fr.hartland.serenna.core.neuron.InputNeuron;
 import fr.hartland.serenna.core.neuron.Layer;
+import fr.hartland.serenna.core.neuron.Neuron;
 import fr.hartland.serenna.core.neuron.OutputNeuron;
 
 /**
@@ -17,19 +18,35 @@ import fr.hartland.serenna.core.neuron.OutputNeuron;
  */
 public class NeuralNetworkTest
 {
-	private static NeuralNetwork generate111LinearNetwork()
+	/**
+	 * Network factory for tests.
+	 * 
+	 * @param weight
+	 *            default weight for all connections.
+	 * @param layerSizes
+	 *            #input, (#hidden)* #output
+	 * @return the network with provided layer sizes and linear activation functions
+	 */
+	@SuppressWarnings("unchecked")
+	public static NeuralNetwork buildNetwork(double weight, int... layerSizes)
 	{
-		NeuralNetwork network = new NeuralNetwork("network");
+		Assert.assertTrue(layerSizes.length >= 2);
+
+		NeuralNetwork network = new NeuralNetwork();
 		{
-			InputNeuron input = new InputNeuron("input");
-			HiddenNeuron hidden = new HiddenNeuron("hidden", new LinearActivationFunction());
-			OutputNeuron output = new OutputNeuron("output", new LinearActivationFunction());
+			Layer<? extends Neuron> inputLayer = Layer.buildInputLayer(layerSizes[0]);
+			network.setInputLayer((Layer<InputNeuron>) inputLayer);
 
-			Connection.buildConnection(input, hidden);
-			Connection.buildConnection(hidden, output);
-
-			network.addInput(input);
-			network.addOutput(output);
+			for (int i = 1; i < layerSizes.length - 1; i++)
+			{
+				Layer<? extends Neuron> targetLayer = Layer.buildHiddenLayer(layerSizes[i], new LinearActivationFunction());
+				WeightedConnection.buildConnections(inputLayer, targetLayer, weight);
+				inputLayer = targetLayer;
+			}
+			Layer<OutputNeuron> outputLayer = Layer.buildOutputLayer(layerSizes[layerSizes.length - 1],
+					new LinearActivationFunction());
+			WeightedConnection.buildConnections(inputLayer, outputLayer, weight);
+			network.setOutputLayer(outputLayer);
 		}
 		return network;
 	}
@@ -38,23 +55,10 @@ public class NeuralNetworkTest
 	 * buildNetwork validates neural network building through layers.
 	 */
 	@Test
-	public void buildNetwork()
+	public void exposesNetworkBuilding()
 	{
 		// Setup
-		NeuralNetwork network = new NeuralNetwork();
-		{
-			Layer<InputNeuron> inputLayer = Layer.buildInputLayer(10);
-			Layer<HiddenNeuron> firstLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
-			Layer<HiddenNeuron> secondLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
-			Layer<OutputNeuron> outputLayer = Layer.buildOutputLayer(10, new LinearActivationFunction());
-
-			WeightedConnection.buildConnections(inputLayer, firstLayer, 0.1);
-			WeightedConnection.buildConnections(firstLayer, secondLayer, 0.1);
-			WeightedConnection.buildConnections(secondLayer, outputLayer, 0.1);
-
-			network.setInputLayer(inputLayer);
-			network.setOutputLayer(outputLayer);
-		}
+		NeuralNetwork network = buildNetwork(0.1, 10, 10, 10, 10);
 		// Test
 		network.setValue(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 		network.compute();
@@ -66,34 +70,19 @@ public class NeuralNetworkTest
 		}
 	}
 
-
 	/**
-	 * countNumberOfNeurons computes the number of neurons within the network. 
+	 * countNumberOfNeurons computes the number of neurons within the network.
 	 */
 	@Test
 	public void countNumberOfNeurons()
 	{
-		// Setup
-		NeuralNetwork network = new NeuralNetwork();
-		{
-			Layer<InputNeuron> inputLayer = Layer.buildInputLayer(10);
-			Layer<HiddenNeuron> firstLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
-			Layer<HiddenNeuron> secondLayer = Layer.buildHiddenLayer(10, new LinearActivationFunction());
-			Layer<OutputNeuron> outputLayer = Layer.buildOutputLayer(10, new LinearActivationFunction());
-
-			WeightedConnection.buildConnections(inputLayer, firstLayer, 0.1);
-			WeightedConnection.buildConnections(firstLayer, secondLayer, 0.1);
-			WeightedConnection.buildConnections(secondLayer, outputLayer, 0.1);
-
-			network.setInputLayer(inputLayer);
-			network.setOutputLayer(outputLayer);
-		}
+		NeuralNetwork network = buildNetwork(0.1, 10, 10, 10, 10);
 		// Test
 		Assert.assertEquals(40, network.size());
 	}
-	
+
 	/**
-	 * countNumberOfNeurons computes the number of neurons within the network. 
+	 * countNumberOfNeurons computes the number of neurons within the network.
 	 */
 	@Test
 	public void countNumberOfNeuronsSimpleTopo()
@@ -118,7 +107,24 @@ public class NeuralNetworkTest
 		// Test
 		Assert.assertEquals(4, network.size());
 	}
-	
+
+	/**
+	 * simpleNetworkComputation
+	 */
+	@Test
+	public void noHiddenLayersimpleNetworkComputation()
+	{
+		// Setup
+		NeuralNetwork network = buildNetwork(1.0, 1, 1);
+		// Test
+		network.setValue(2);
+		network.compute();
+		double[] output = network.getValue();
+		// Assertions
+		Assert.assertEquals(1, output.length);
+		Assert.assertEquals(2, output[0], 10E-6);
+	}
+
 	/**
 	 * simpleNetworkComputation
 	 */
@@ -126,9 +132,26 @@ public class NeuralNetworkTest
 	public void simpleNetworkComputation()
 	{
 		// Setup
-		NeuralNetwork network = generate111LinearNetwork();
+		NeuralNetwork network = buildNetwork(1.0, 1, 1, 1);
 		// Test
-		network.setValue(10);
+		network.setValue(1);
+		network.compute();
+		double[] output = network.getValue();
+		// Assertions
+		Assert.assertEquals(1, output.length);
+		Assert.assertEquals(1, output[0], 10E-6);
+	}
+
+	/**
+	 * simpleNetworkComputation
+	 */
+	@Test
+	public void networkComputation()
+	{
+		// Setup
+		NeuralNetwork network = buildNetwork(1.0, 1, 10, 1);
+		// Test
+		network.setValue(1);
 		network.compute();
 		double[] output = network.getValue();
 		// Assertions
@@ -142,7 +165,7 @@ public class NeuralNetworkTest
 	@Test
 	public void simpleNetworkComputations()
 	{
-		NeuralNetwork network = generate111LinearNetwork();
+		NeuralNetwork network = buildNetwork(1.0, 1, 1, 1);
 		// Test
 		for (int i = 0; i < 10; i++)
 		{
