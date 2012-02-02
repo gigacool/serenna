@@ -130,7 +130,10 @@ public class NetworkLearningContext
 	}
 
 	/**
-	 * w_{ij}' = w_{ij} + n.deltaErr.df(x)/x
+	 * Operate a weight update accordingly to the following function : <code> w_{ij}' = w_{ij} + eta.deltaErr.df(x)/x</code>
+	 * 
+	 * @param learningRate
+	 *            learning step rate.
 	 */
 	public void updateWeights(double learningRate)
 	{
