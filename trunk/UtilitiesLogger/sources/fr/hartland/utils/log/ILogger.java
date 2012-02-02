@@ -9,15 +9,15 @@ public interface ILogger {
 	/** Logging turned off */
 	short OFF = 1 << 0;
 	/** Log only fatal errors */
-	short FATAL = 1 << 1;
+	short FATAL = OFF << 1;
 	/** log up to error level */
-	short ERROR = 1 << 2;
+	short ERROR = FATAL << 1;
 	/** log up to warnings level */
-	short WARNING = 1 << 3;
+	short WARNING = ERROR << 1;
 	/** log up to info level */
-	short INFO = 1 << 4;
+	short INFO = WARNING << 1;
 	/** log everything up to debug level */
-	short DEBUG = 1 << 5;
+	short DEBUG = INFO << 1;
 
 	/**
 	 * Log a fatal error message.
