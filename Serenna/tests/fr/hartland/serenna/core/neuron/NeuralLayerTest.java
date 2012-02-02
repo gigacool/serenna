@@ -8,7 +8,6 @@ import org.junit.Test;
 import fr.hartland.serenna.core.activations.IActivationFunction;
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
-import fr.hartland.serenna.core.connection.WeightedConnection;
 
 /**
  * Exposes layer building helper factories functionalities.
@@ -176,22 +175,19 @@ public class NeuralLayerTest
 		Layer<HiddenNeuron> source = Layer.buildHiddenLayer(10, activationFunction);
 		Layer<HiddenNeuron> target = Layer.buildHiddenLayer(10, activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target, 1);
+		Connection.buildConnections(source, target, 1);
 		// Assertions
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : sourceNeuron.getOutputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				
 				boolean found = false;
 				for (Neuron targetNeuron : target.getNeurons())
 				{
-					if (targetNeuron.equals(weightedConnection.getOutputNeuron()))
+					if (targetNeuron.equals(connection.getOutputNeuron()))
 					{
-						Assert.assertEquals(1, weightedConnection.getWeight(), 10E-6);
+						Assert.assertEquals(1, connection.getWeight(), 10E-6);
 						found = true;
 						continue;
 					}
@@ -214,16 +210,14 @@ public class NeuralLayerTest
 		Layer<HiddenNeuron> source = Layer.buildHiddenLayer(10, activationFunction);
 		HiddenNeuron target = new HiddenNeuron(activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target, 1);
+		Connection.buildConnections(source, target, 1);
 		// Assertions
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : sourceNeuron.getOutputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				Assert.assertEquals(1, weightedConnection.getWeight(), 10E-6);
+				Assert.assertEquals(1, connection.getWeight(), 10E-6);
 				Assert.assertEquals(target, connection.getOutputNeuron());
 				count++;
 			}
@@ -242,16 +236,14 @@ public class NeuralLayerTest
 		HiddenNeuron source = new HiddenNeuron(activationFunction);
 		Layer<HiddenNeuron> target = Layer.buildHiddenLayer(10, activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target, 1);
+		Connection.buildConnections(source, target, 1);
 		// Assertions
 		for (Neuron targetNeuron : target.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : targetNeuron.getInputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				Assert.assertEquals(1, weightedConnection.getWeight(), 10E-6);
+				Assert.assertEquals(1, connection.getWeight(), 10E-6);
 				Assert.assertEquals(source, connection.getInputNeuron());
 				count++;
 			}
@@ -270,21 +262,19 @@ public class NeuralLayerTest
 		Layer<HiddenNeuron> source = Layer.buildHiddenLayer(10, activationFunction);
 		Layer<HiddenNeuron> target = Layer.buildHiddenLayer(10, activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target);
+		Connection.buildConnections(source, target);
 		// Assertions
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : sourceNeuron.getOutputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				Assert.assertTrue(Math.abs(weightedConnection.getWeight()) <= 1);
-				
+				Assert.assertTrue(Math.abs(connection.getWeight()) <= 1);
+
 				boolean found = false;
 				for (Neuron targetNeuron : target.getNeurons())
 				{
-					if (targetNeuron.equals(weightedConnection.getOutputNeuron()))
+					if (targetNeuron.equals(connection.getOutputNeuron()))
 					{
 						found = true;
 						continue;
@@ -308,18 +298,16 @@ public class NeuralLayerTest
 		Layer<HiddenNeuron> source = Layer.buildHiddenLayer(10, activationFunction);
 		HiddenNeuron target = new HiddenNeuron(activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target);
+		Connection.buildConnections(source, target);
 		// Assertions
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : sourceNeuron.getOutputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				Assert.assertTrue(Math.abs(weightedConnection.getWeight()) <= 1);
-				
-				Assert.assertEquals(target, weightedConnection.getOutputNeuron());
+				Assert.assertTrue(Math.abs(connection.getWeight()) <= 1);
+
+				Assert.assertEquals(target, connection.getOutputNeuron());
 				count++;
 			}
 			Assert.assertEquals(1, count);
@@ -337,18 +325,16 @@ public class NeuralLayerTest
 		HiddenNeuron source = new HiddenNeuron(activationFunction);
 		Layer<HiddenNeuron> target = Layer.buildHiddenLayer(10, activationFunction);
 		// Test
-		WeightedConnection.buildConnections(source, target);
+		Connection.buildConnections(source, target);
 		// Assertions
 		for (Neuron targetNeuron : target.getNeurons())
 		{
 			int count = 0;
 			for (Connection connection : targetNeuron.getInputConnections())
 			{
-				Assert.assertTrue(connection instanceof WeightedConnection);
-				WeightedConnection weightedConnection = (WeightedConnection) connection;
-				Assert.assertTrue(Math.abs(weightedConnection.getWeight()) <= 1);
-				
-				Assert.assertEquals(source, weightedConnection.getInputNeuron());
+				Assert.assertTrue(Math.abs(connection.getWeight()) <= 1);
+
+				Assert.assertEquals(source, connection.getInputNeuron());
 				count++;
 			}
 			Assert.assertEquals(1, count);

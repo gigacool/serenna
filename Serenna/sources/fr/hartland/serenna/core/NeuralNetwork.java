@@ -70,7 +70,7 @@ public class NeuralNetwork extends Unit
 	 * 
 	 * @param values
 	 */
-	public void setValue(int... values)
+	public void setValue(double... values)
 	{
 		if (values.length != inputNeurons.size())
 		{
@@ -138,6 +138,26 @@ public class NeuralNetwork extends Unit
 		{
 			addOutput(neuron);
 		}
+	}
+
+	/**
+	 * Gets the output neurons from the output layer.
+	 * 
+	 * @return network output neurons.
+	 */
+	List<OutputNeuron> getOutputLayer()
+	{
+		return outputNeurons;
+	}
+
+	/**
+	 * Gets the input neurons from the input layer.
+	 * 
+	 * @return network input neurons.
+	 */
+	List<InputNeuron> getInputLayer()
+	{
+		return inputNeurons;
 	}
 
 	/**

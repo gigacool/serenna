@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import fr.hartland.serenna.core.activations.LinearActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
-import fr.hartland.serenna.core.connection.WeightedConnection;
 import fr.hartland.serenna.core.neuron.HiddenNeuron;
 import fr.hartland.serenna.core.neuron.InputNeuron;
 import fr.hartland.serenna.core.neuron.Layer;
@@ -40,12 +39,12 @@ public class NeuralNetworkTest
 			for (int i = 1; i < layerSizes.length - 1; i++)
 			{
 				Layer<? extends Neuron> targetLayer = Layer.buildHiddenLayer(layerSizes[i], new LinearActivationFunction());
-				WeightedConnection.buildConnections(inputLayer, targetLayer, weight);
+				Connection.buildConnections(inputLayer, targetLayer, weight);
 				inputLayer = targetLayer;
 			}
 			Layer<OutputNeuron> outputLayer = Layer.buildOutputLayer(layerSizes[layerSizes.length - 1],
 					new LinearActivationFunction());
-			WeightedConnection.buildConnections(inputLayer, outputLayer, weight);
+			Connection.buildConnections(inputLayer, outputLayer, weight);
 			network.setOutputLayer(outputLayer);
 		}
 		return network;
