@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Provide a simple mean to reverse iterate on a list collection.
+ * Provide a simple mean to reverse iterate on a list collection. Adapted from web samples.
  * 
  * @param <T>
  *            the list type content.
