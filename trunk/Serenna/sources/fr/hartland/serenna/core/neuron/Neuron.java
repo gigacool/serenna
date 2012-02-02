@@ -97,7 +97,7 @@ public abstract class Neuron extends Unit
 	 * 
 	 * @return the input connections.
 	 */
-	protected Iterable<Connection> getInputConnections()
+	Iterable<Connection> getInputConnections()
 	{
 		return inputs;
 	}

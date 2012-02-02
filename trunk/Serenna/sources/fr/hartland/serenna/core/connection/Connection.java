@@ -3,6 +3,7 @@ package fr.hartland.serenna.core.connection;
 import fr.hartland.serenna.core.neuron.HiddenNeuron;
 import fr.hartland.serenna.core.neuron.Layer;
 import fr.hartland.serenna.core.neuron.Neuron;
+import fr.hartland.serenna.utils.RandomProvider;
 
 /**
  * A connection provide a link from one neuron to another. The connection role is to convey values changed or unchanged (e.g. a
@@ -13,6 +14,7 @@ public class Connection
 {
 	private Neuron inputNeuron;
 	private Neuron outputNeuron;
+	private double weight;
 
 	/**
 	 * Default constructor. An arc goes from one neuron to another.
@@ -24,8 +26,24 @@ public class Connection
 	 */
 	protected Connection(Neuron inputNeuron, Neuron outputNeuron)
 	{
+		this(inputNeuron, outputNeuron, 1);
+	}
+
+	/**
+	 * Default constructor. An arc goes from one neuron to another.
+	 * 
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
+	 * @param weight
+	 *            the arc weight to apply to value incoming from input neuron.
+	 */
+	protected Connection(Neuron inputNeuron, Neuron outputNeuron, double weight)
+	{
 		this.inputNeuron = inputNeuron;
 		this.outputNeuron = outputNeuron;
+		this.weight = weight;
 	}
 
 	/**
@@ -47,7 +65,7 @@ public class Connection
 
 	/**
 	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons from the
-	 * other layer.
+	 * other layer. Each connection weights are set randomly in [-1:1].
 	 * 
 	 * @param source
 	 *            the source layer.
@@ -60,7 +78,82 @@ public class Connection
 		{
 			for (Neuron targetNeuron : target.getNeurons())
 			{
-				buildConnection(sourceNeuron, targetNeuron);
+				buildConnection(sourceNeuron, targetNeuron, RandomProvider.getInstance().nextDouble(-1, 1));
+			}
+		}
+	}
+
+	/**
+	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to target
+	 * neuron. Each connection weights are set randomly in [-1:1].
+	 * 
+	 * @param source
+	 *            the source layer.
+	 * @param target
+	 *            the destination neuron.
+	 */
+	public static void buildConnections(Layer<HiddenNeuron> source, HiddenNeuron target)
+	{
+		for (Neuron sourceNeuron : source.getNeurons())
+		{
+			buildConnection(sourceNeuron, target, RandomProvider.getInstance().nextDouble(-1, 1));
+		}
+	}
+
+	/**
+	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to source
+	 * neuron. Each connection weights are set randomly in [-1:1].
+	 * 
+	 * @param source
+	 *            the source neuron.
+	 * @param target
+	 *            the destination layer.
+	 */
+	public static void buildConnections(HiddenNeuron source, Layer<HiddenNeuron> target)
+	{
+		for (Neuron targetNeuron : target.getNeurons())
+		{
+			buildConnection(source, targetNeuron, RandomProvider.getInstance().nextDouble(-1, 1));
+		}
+	}
+
+	/**
+	 * Connection factory builder.
+	 * 
+	 * @param inputNeuron
+	 *            the neuron providing value to the arc.
+	 * @param outputNeuron
+	 *            the destination neuron to get the value conducted by the arc.
+	 * @param weight
+	 *            the arc weight to apply to value incoming from input neuron.
+	 * @return the neuron properly set.
+	 */
+	public static Connection buildConnection(Neuron inputNeuron, Neuron outputNeuron, double weight)
+	{
+		Connection connection = new Connection(inputNeuron, outputNeuron, weight);
+		inputNeuron.addOutput(connection);
+		outputNeuron.addInput(connection);
+		return connection;
+	}
+
+	/**
+	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons from the
+	 * other layer.
+	 * 
+	 * @param source
+	 *            the source layer.
+	 * @param target
+	 *            the destination layer.
+	 * @param defaultWeight
+	 *            the default connection weights.
+	 */
+	public static void buildConnections(Layer<? extends Neuron> source, Layer<? extends Neuron> target, double defaultWeight)
+	{
+		for (Neuron sourceNeuron : source.getNeurons())
+		{
+			for (Neuron targetNeuron : target.getNeurons())
+			{
+				buildConnection(sourceNeuron, targetNeuron, defaultWeight);
 			}
 		}
 	}
@@ -73,13 +166,46 @@ public class Connection
 	 *            the source layer.
 	 * @param target
 	 *            the destination neuron.
+	 * @param defaultWeight
+	 *            the default connection weights.
 	 */
-	public static void buildConnections(Layer<HiddenNeuron> source, HiddenNeuron target)
+	public static void buildConnections(Layer<HiddenNeuron> source, HiddenNeuron target, double defaultWeight)
 	{
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
-			buildConnection(sourceNeuron, target);
+			buildConnection(sourceNeuron, target, defaultWeight);
 		}
+	}
+
+	/**
+	 * (Re)Defines the arc weight.
+	 * 
+	 * @param weight
+	 *            the new arc weight.
+	 */
+	public void setWeight(double weight)
+	{
+		this.weight = weight;
+	}
+
+	/**
+	 * Returns the connection weight value.
+	 * 
+	 * @return the weight.
+	 */
+	public double getWeight()
+	{
+		return weight;
+	}
+
+	/**
+	 * Returns the value contained within the neuron if any; else return default value.
+	 * 
+	 * @return value computed during computation.
+	 */
+	public double getValue()
+	{
+		return weight * inputNeuron.getValue();
 	}
 
 	/**
@@ -90,12 +216,14 @@ public class Connection
 	 *            the source neuron.
 	 * @param target
 	 *            the destination layer.
+	 * @param defaultWeight
+	 *            the default connection weights.
 	 */
-	public static void buildConnections(HiddenNeuron source, Layer<HiddenNeuron> target)
+	public static void buildConnections(HiddenNeuron source, Layer<HiddenNeuron> target, double defaultWeight)
 	{
 		for (Neuron targetNeuron : target.getNeurons())
 		{
-			buildConnection(source, targetNeuron);
+			buildConnection(source, targetNeuron, defaultWeight);
 		}
 	}
 
@@ -117,16 +245,6 @@ public class Connection
 	public Neuron getOutputNeuron()
 	{
 		return outputNeuron;
-	}
-
-	/**
-	 * Returns the value contained within the neuron if any; else return default value.
-	 * 
-	 * @return value computed during computation.
-	 */
-	public double getValue()
-	{
-		return inputNeuron.getValue();
 	}
 
 }
