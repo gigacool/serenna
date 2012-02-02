@@ -3,7 +3,6 @@ package fr.hartland.utils.log;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * Provides uniform mean to create file targeted loggers.

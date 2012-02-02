@@ -13,7 +13,12 @@ import org.junit.Test;
  */
 public class SamplesTest
 {
-	static Samples generateTestSamples()
+	/**
+	 * Create ad-hoc test samples for tests.
+	 * 
+	 * @return the test/training samples.
+	 */
+	public static Samples generateTestSamples()
 	{
 		Samples samples = new Samples();
 		{
