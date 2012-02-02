@@ -1,13 +1,13 @@
-package fr.hartland.serenna.core.learning;
+package fr.hartland.serenna.core.learning.algorithms;
 
 import org.junit.Test;
 
 import fr.hartland.serenna.core.NetworkLearningContext;
 import fr.hartland.serenna.core.NeuralNetwork;
 import fr.hartland.serenna.core.NeuralNetworkTest;
-import fr.hartland.serenna.core.learning.algorithms.Backpropagation;
-import fr.hartland.utils.trace.ConsoleTracer;
-import fr.hartland.utils.trace.ITracer;
+import fr.hartland.serenna.core.learning.Samples;
+import fr.hartland.serenna.core.learning.SamplesTest;
+import fr.hartland.utils.trace.NullTracer;
 
 /**
  * Exposes {@link Backpropagation} learning algorithm.
@@ -25,14 +25,11 @@ public class BackpropagationTest
 		NeuralNetwork network = NeuralNetworkTest.buildNetwork(1, 1, 1);
 		Samples trainingSet = SamplesTest.generateTestSamples();
 
-		ITracer<Number> tracer = new ConsoleTracer<Number>();
-		tracer.setSeparator("\t");
-		Backpropagation trainer = new Backpropagation(tracer, trainingSet, 0.05, 1000);
+		Backpropagation trainer = new Backpropagation(new NullTracer<Number>(), trainingSet, 0.05, 1000);
 
 		// Test
 		trainer.train(new NetworkLearningContext(network));
 		// Assertions
-
 	}
 
 }
