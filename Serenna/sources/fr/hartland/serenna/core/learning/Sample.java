@@ -28,8 +28,9 @@ public class Sample
 	{
 		if (this == o)
 			return true;
-		if (!(o instanceof Sample))
+		if (o == null)
 			return false;
+		if (o.getClass() != this.getClass()) return false;
 		Sample so = (Sample) o;
 		if (so.inputs.length != this.inputs.length || so.outputs.length != this.outputs.length)
 			return false;

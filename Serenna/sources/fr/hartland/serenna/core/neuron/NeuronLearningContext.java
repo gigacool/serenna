@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import fr.hartland.serenna.core.NetworkLearningContext;
 import fr.hartland.serenna.core.activations.IDifferentiableActivationFunction;
 import fr.hartland.serenna.core.connection.Connection;
 
