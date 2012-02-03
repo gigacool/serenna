@@ -4,7 +4,8 @@ import fr.hartland.serenna.core.activations.IActivationFunction;
 
 /**
  * Provide output neuron specific abilities as compared to typical neurons.
- * 
+ *
+ * @author cedric.hartland
  */
 public class OutputNeuron extends Neuron
 {
@@ -12,7 +13,7 @@ public class OutputNeuron extends Neuron
 
 	/**
 	 * Default constructor.
-	 * 
+	 *
 	 * @param activationFunction
 	 *            the activation function associated to the neuron.
 	 */
@@ -23,7 +24,7 @@ public class OutputNeuron extends Neuron
 
 	/**
 	 * Constructor with custom name.
-	 * 
+	 *
 	 * @param identifier
 	 *            the neuron non necessarily unique identifier.
 	 * @param activationFunction
@@ -34,11 +35,11 @@ public class OutputNeuron extends Neuron
 		super(identifier, activationFunction);
 	}
 
-	@Override
-	public void compute()
-	{
-		super.compute();
-	}
+    @Override
+    public void compute()
+    {
+        super.compute();
+    }
 
 	@Override
 	public void clear()

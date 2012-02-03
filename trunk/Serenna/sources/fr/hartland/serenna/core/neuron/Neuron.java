@@ -9,6 +9,8 @@ import fr.hartland.serenna.core.connection.Connection;
 
 /**
  * Exposes core functionalities for a neuronal neuron.
+ *
+ * @author cedric.hartland
  */
 public abstract class Neuron extends Unit
 {
@@ -25,7 +27,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Default constructor. The neuron has an identifier name and an activation function.
-	 * 
+	 *
 	 * @param name
 	 *            the neuron non unique identifier name.
 	 * @param activationFunction
@@ -41,18 +43,18 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Default constructor.
-	 * 
+	 *
 	 * @param activationFunction
 	 *            the activation function associated to the neuron.
 	 */
-	public Neuron(IActivationFunction activationFunction)
+    protected Neuron(IActivationFunction activationFunction)
 	{
 		this("neuron:" + neuronIdentifier++, activationFunction);
 	}
 
 	/**
 	 * Returns the activation function defined for the neuron.
-	 * 
+	 *
 	 * @return the activation function.
 	 */
 	public IActivationFunction getActivationFunction()
@@ -62,7 +64,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Returns the value contained within the node if any; else return default value.
-	 * 
+	 *
 	 * @return value computed during computation.
 	 */
 	public double getValue()
@@ -72,7 +74,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Defines the neuron value.
-	 * 
+	 *
 	 * @param value
 	 *            the value to set
 	 */
@@ -83,7 +85,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Append an input connection connection. The actual neuron become the output target for the connection.
-	 * 
+	 *
 	 * @param input
 	 *            the input connection connection.
 	 */
@@ -94,7 +96,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Returns the input connections defined for the current neuron.
-	 * 
+	 *
 	 * @return the input connections.
 	 */
 	Iterable<Connection> getInputConnections()
@@ -104,7 +106,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Add an output connection to this neuron.
-	 * 
+	 *
 	 * @param output
 	 *            the output connection linking to another neuron.
 	 */
@@ -115,7 +117,7 @@ public abstract class Neuron extends Unit
 
 	/**
 	 * Returns the output connections defined for the current neuron.
-	 * 
+	 *
 	 * @return the output connections.
 	 */
 	public Iterable<Connection> getOutputConnections()

@@ -2,10 +2,13 @@ package fr.hartland.serenna.core.activations;
 
 /**
  * Defines generalized heaviside step function:
+ * 
  * <pre>
- * f(x) = { a, x < threshold; 
+ * f(x) = { a, x < threshold;
  *        { b, x >= threshold;
  * </pre>
+ *
+ * @author cedric.hartland
  */
 public class HeavisideActivationFunction implements IActivationFunction {
 
@@ -24,7 +27,7 @@ public class HeavisideActivationFunction implements IActivationFunction {
 
 	/**
 	 * Default constructor. Provides f(x) = { above, x < threshold; over, x >= threshold; }
-	 * 
+	 *
 	 * @param threshold
 	 *            threshold
 	 * @param below

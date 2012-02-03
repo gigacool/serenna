@@ -3,6 +3,8 @@ package fr.hartland.serenna.core.learning;
 /**
  * Represent a training or test sample. A Sample has input values to be submitted to the network as an input. The sample also
  * contains output values to be considered the expected output of the network for the provided input.
+ *
+ * @author cedric.hartland
  */
 public class Sample
 {
@@ -11,7 +13,7 @@ public class Sample
 
 	/**
 	 * Default constructor. Note that the values array are not cloned.
-	 * 
+	 *
 	 * @param inputs
 	 *            the input values.
 	 * @param ouputs
@@ -52,20 +54,20 @@ public class Sample
 	public int hashCode()
 	{
 		int hash = 1;
-		for (int i = 0; i < inputs.length; i++)
+        for (double value : inputs)
 		{
-			hash = hash * 10 + Double.valueOf(inputs[i]).hashCode();
+            hash = hash * 10 + Double.valueOf(value).hashCode();
 		}
-		for (int i = 0; i < outputs.length; i++)
+        for (double value : outputs)
 		{
-			hash = hash * 10 + Double.valueOf(outputs[i]).hashCode();
+            hash = hash * 10 + Double.valueOf(value).hashCode();
 		}
 		return hash;
 	}
 
 	/**
 	 * Returns the number of output values for the sample.
-	 * 
+	 *
 	 * @return number of output values.
 	 */
 	public int getOutputLength()
@@ -75,7 +77,7 @@ public class Sample
 
 	/**
 	 * Returns the number of input values for the sample.
-	 * 
+	 *
 	 * @return number of input values.
 	 */
 	public int getInputLength()
