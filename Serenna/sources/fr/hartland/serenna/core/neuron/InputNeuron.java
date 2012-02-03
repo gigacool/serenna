@@ -5,7 +5,8 @@ import fr.hartland.serenna.core.activations.LinearActivationFunction;
 /**
  * Provide specific behavior components for input neurons as compared to typical neurons (linear activation function, visible
  * ability to set its input value, etc.)
- * 
+ *
+ * @author cedric.hartland
  */
 public class InputNeuron extends Neuron
 {
@@ -21,7 +22,7 @@ public class InputNeuron extends Neuron
 
 	/**
 	 * Constructor with custom name.
-	 * 
+	 *
 	 * @param identifier
 	 *            the neuron non necessarily unique identifier.
 	 */
@@ -31,12 +32,12 @@ public class InputNeuron extends Neuron
 	}
 
 	@Override
-	public void setValue(double value)
-	{
-		super.setValue(value);
-	}
+    public void setValue(double value)
+    {
+        super.setValue(value);
+    }
 
-	@Override
+    @Override
 	protected void compute()
 	{
 		// NOP
