@@ -7,7 +7,7 @@ import fr.hartland.serenna.core.activations.IActivationFunction;
 
 /**
  * A {@link Layer} instance proposes layered network building simplifications.
- *
+ * 
  * @param <T>
  *            a neuron type.
  */
@@ -15,14 +15,14 @@ public class Layer<T extends Neuron>
 {
 	private final List<T> neurons;
 
-    private Layer(int numberOfNeurons)
+	private Layer(int numberOfNeurons)
 	{
 		this.neurons = new ArrayList<T>(numberOfNeurons);
 	}
 
 	/**
 	 * Returns the layer neurons.
-	 *
+	 * 
 	 * @return the neurons within the layer.
 	 */
 	public Iterable<T> getNeurons()
@@ -32,7 +32,7 @@ public class Layer<T extends Neuron>
 
 	/**
 	 * Hidden neuron layer factory.
-	 *
+	 * 
 	 * @param numberOfNeurons
 	 *            the number of neurons within the layer.
 	 * @param activationFunction
@@ -51,7 +51,7 @@ public class Layer<T extends Neuron>
 
 	/**
 	 * Output neuron layer factory.
-	 *
+	 * 
 	 * @param numberOfNeurons
 	 *            the number of neurons within the layer.
 	 * @param activationFunction
@@ -70,7 +70,7 @@ public class Layer<T extends Neuron>
 
 	/**
 	 * Input neuron layer factory.
-	 *
+	 * 
 	 * @param numberOfNeurons
 	 *            the number of neurons within the layer.
 	 * @return the layer containing input neurons.

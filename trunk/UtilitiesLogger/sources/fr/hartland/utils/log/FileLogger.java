@@ -7,7 +7,8 @@ import java.io.PrintStream;
 /**
  * Logger to file outputs.
  */
-public class FileLogger extends AbstractLogger {
+public class FileLogger extends AbstractLogger
+{
 
 	protected FileLogger(short level, String filePath) throws FileNotFoundException
 	{

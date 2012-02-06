@@ -4,7 +4,7 @@ import fr.hartland.serenna.core.activations.IActivationFunction;
 
 /**
  * Provide hidden neuron specific behavior (i.e. typical neuron behavior as opposed to input or output neurons).
- *
+ * 
  * @author cedric.hartland
  */
 public class HiddenNeuron extends Neuron
@@ -13,7 +13,7 @@ public class HiddenNeuron extends Neuron
 
 	/**
 	 * Default constructor.
-	 *
+	 * 
 	 * @param activationFunction
 	 *            the activation function associated to the neuron.
 	 */
@@ -24,7 +24,7 @@ public class HiddenNeuron extends Neuron
 
 	/**
 	 * Constructor with custom name.
-	 *
+	 * 
 	 * @param identifier
 	 *            the neuron non necessarily unique identifier.
 	 * @param activationFunction

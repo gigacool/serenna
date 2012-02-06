@@ -45,8 +45,8 @@ public class SamplesTest
 	}
 
 	/**
-	 * testShuffle. Chances are this test fails even though shuffle method still work. Probability that it fails should be low
-	 * enough although that running it twice should expose malfunction.
+	 * testShuffle. Chances are this test fails even though shuffle method still work. Probability that it fails should
+	 * be low enough although that running it twice should expose malfunction.
 	 */
 	@Test
 	public void testShuffle()

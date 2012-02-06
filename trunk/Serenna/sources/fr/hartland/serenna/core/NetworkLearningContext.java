@@ -14,9 +14,9 @@ import fr.hartland.serenna.core.neuron.NeuronLearningContext;
 import fr.hartland.serenna.utils.ReverseListIterator;
 
 /**
- * Provide a dedicated context to apply learning algorithms on neural networks. The main reason to have a separate class concerns
- * the separation of concepts from network value calculations and network training.
- *
+ * Provide a dedicated context to apply learning algorithms on neural networks. The main reason to have a separate class
+ * concerns the separation of concepts from network value calculations and network training.
+ * 
  * @author cedric.hartland
  */
 public class NetworkLearningContext
@@ -27,12 +27,12 @@ public class NetworkLearningContext
 	private final Set<Neuron> visited;
 	private final List<Neuron> orderedNeurons;
 
-    /**
-     * Default constructor. Setup the learning context for the provided neural network.
-     *
-     * @param network
-     *            the neural network.
-     */
+	/**
+	 * Default constructor. Setup the learning context for the provided neural network.
+	 * 
+	 * @param network
+	 *            the neural network.
+	 */
 	public NetworkLearningContext(NeuralNetwork network)
 	{
 		this.network = network;
@@ -48,7 +48,7 @@ public class NetworkLearningContext
 
 	/**
 	 * Returns the network associated to the network learning context.
-	 *
+	 * 
 	 * @return the neural network.
 	 */
 	public NeuralNetwork getNetwork()
@@ -58,7 +58,7 @@ public class NetworkLearningContext
 
 	/**
 	 * Depth first search algorithm to compute ordered list of neurons through their connections.
-	 *
+	 * 
 	 * @param orderedNeurons
 	 *            the result list.
 	 * @param visitedNeurons
@@ -80,15 +80,15 @@ public class NetworkLearningContext
 		orderedNeurons.add(neuron);
 	}
 
-    /**
-     * Computes the square root error of the network output to the expected output, for a given input.
-     *
-     * @param input
-     *            the network input value.
-     * @param expectedOutput
-     *            the expected network output result.
-     * @return the square root error in between the output neuron actual and expected values.
-     */
+	/**
+	 * Computes the square root error of the network output to the expected output, for a given input.
+	 * 
+	 * @param input
+	 *            the network input value.
+	 * @param expectedOutput
+	 *            the expected network output result.
+	 * @return the square root error in between the output neuron actual and expected values.
+	 */
 	public double squareRootError(double[] input, double[] expectedOutput)
 	{
 		double result = 0;
@@ -103,9 +103,9 @@ public class NetworkLearningContext
 	}
 
 	/**
-	 * Computes the error delta for each neurons, for the given difference between the actual network output and the provided
-	 * expected output.
-	 *
+	 * Computes the error delta for each neurons, for the given difference between the actual network output and the
+	 * provided expected output.
+	 * 
 	 * @param expectedOutputs
 	 *            the network expected output.
 	 */
@@ -133,8 +133,9 @@ public class NetworkLearningContext
 	}
 
 	/**
-	 * Operate a weight update accordingly to the following function : <code> w_{ij}' = w_{ij} + eta.deltaErr.df(x)/x</code>
-	 *
+	 * Operate a weight update accordingly to the following function :
+	 * <code> w_{ij}' = w_{ij} + eta.deltaErr.df(x)/x</code>
+	 * 
 	 * @param learningRate
 	 *            learning step rate.
 	 */
@@ -144,9 +145,11 @@ public class NetworkLearningContext
 		{
 			for (Connection connection : neuron.getOutputConnections())
 			{
-				IDifferentiableActivationFunction f = NeuronLearningContext.getDifferentiableActivationFunction(connection
-						.getOutputNeuron());
-				double newWeight = connection.getWeight() + learningRate * neuronDeltas.get(connection.getOutputNeuron())
+				IDifferentiableActivationFunction f = NeuronLearningContext
+						.getDifferentiableActivationFunction(connection
+								.getOutputNeuron());
+				double newWeight = connection.getWeight() + learningRate
+						* neuronDeltas.get(connection.getOutputNeuron())
 						* f.computeDerivedValue(connection.getOutputNeuron().getValue());
 				connection.setWeight(newWeight);
 			}

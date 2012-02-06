@@ -3,7 +3,8 @@ package fr.hartland.utils.log;
 /**
  * Provides a logger to a console output.
  */
-public class ConsoleLogger extends AbstractLogger {
+public class ConsoleLogger extends AbstractLogger
+{
 
 	/**
 	 * Default constructor.

@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * The abstract logger provides core functionalities common to any
- * {@link ILogger} implementation.
+ * The abstract logger provides core functionalities common to any {@link ILogger} implementation.
  */
-abstract class AbstractLogger implements ILogger {
+abstract class AbstractLogger implements ILogger
+{
 
 	private final PrintStream out;
 	private short level;
@@ -19,12 +19,14 @@ abstract class AbstractLogger implements ILogger {
 	protected static DateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
 
-	protected AbstractLogger(short level, PrintStream out) {
+	protected AbstractLogger(short level, PrintStream out)
+	{
 		this.out = out;
 		this.level = level;
 	}
 
-	protected PrintStream getOut() {
+	protected PrintStream getOut()
+	{
 		return out;
 	}
 
@@ -34,8 +36,10 @@ abstract class AbstractLogger implements ILogger {
 	 * @param level
 	 *            logging level.
 	 */
-	public void setLevel(short level) {
-		if (level == this.level) {
+	public void setLevel(short level)
+	{
+		if (level == this.level)
+		{
 			return;
 		}
 		debug("Changing logging level from " + this.level + " to " + level);
@@ -44,11 +48,13 @@ abstract class AbstractLogger implements ILogger {
 		debug("Changied logging level from " + oldLevel + " to " + this.level);
 	}
 
-	public String getLevel() {
+	public String getLevel()
+	{
 		return getLevel(level);
 	}
 
-	public String getLevel(short messageLevel) {
+	public String getLevel(short messageLevel)
+	{
 		switch (messageLevel) {
 		case OFF:
 			return "OFF";
@@ -66,7 +72,8 @@ abstract class AbstractLogger implements ILogger {
 		return "LEVEL INCORRECTLY SET";
 	}
 
-	protected String buildFormattedMessage(short messageLevel, String message) {
+	protected String buildFormattedMessage(short messageLevel, String message)
+	{
 		StringBuilder builder = new StringBuilder();
 		{
 			builder.append(dateFormat.format(new Date()));
@@ -80,36 +87,46 @@ abstract class AbstractLogger implements ILogger {
 	}
 
 	@Override
-	public void fatal(String message) {
-		if (level >= FATAL) {
+	public void fatal(String message)
+	{
+		if (level >= FATAL)
+		{
 			out.println(buildFormattedMessage(FATAL, message));
 		}
 	}
 
 	@Override
-	public void error(String message) {
-		if (level >= ERROR) {
+	public void error(String message)
+	{
+		if (level >= ERROR)
+		{
 			out.println(buildFormattedMessage(ERROR, message));
 		}
 	}
 
 	@Override
-	public void warning(String message) {
-		if (level >= WARNING) {
+	public void warning(String message)
+	{
+		if (level >= WARNING)
+		{
 			out.println(buildFormattedMessage(WARNING, message));
 		}
 	}
 
 	@Override
-	public void info(String message) {
-		if (level >= INFO) {
+	public void info(String message)
+	{
+		if (level >= INFO)
+		{
 			out.println(buildFormattedMessage(INFO, message));
 		}
 	}
 
 	@Override
-	public void debug(String message) {
-		if (level >= DEBUG) {
+	public void debug(String message)
+	{
+		if (level >= DEBUG)
+		{
 			out.println(buildFormattedMessage(DEBUG, message));
 		}
 	}
