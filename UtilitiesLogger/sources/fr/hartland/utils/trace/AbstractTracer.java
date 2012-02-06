@@ -2,7 +2,8 @@ package fr.hartland.utils.trace;
 
 import java.io.PrintStream;
 
-abstract class AbstractTracer<T> implements ITracer<T> {
+abstract class AbstractTracer<T> implements ITracer<T>
+{
 
 	private final PrintStream out;
 	private String separator;
@@ -13,14 +14,14 @@ abstract class AbstractTracer<T> implements ITracer<T> {
 		this.out = out;
 		this.separator = ";";
 		this.builder = new StringBuilder();
-		
+
 	}
 
 	protected PrintStream getOut()
 	{
 		return out;
 	}
-	
+
 	private void clearRow()
 	{
 		builder.setLength(0);

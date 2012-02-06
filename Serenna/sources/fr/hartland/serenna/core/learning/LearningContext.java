@@ -4,7 +4,7 @@ import fr.hartland.serenna.core.NetworkLearningContext;
 
 /**
  * Provide a common context for learning algorithms.
- *
+ * 
  * @author cedric.hartland
  */
 public abstract class LearningContext
@@ -13,7 +13,7 @@ public abstract class LearningContext
 
 	/**
 	 * Default constructor. Learning rate is set to 0.1.
-	 *
+	 * 
 	 * @param trainingSet
 	 *            the training set used for learning.
 	 */
@@ -24,7 +24,7 @@ public abstract class LearningContext
 
 	/**
 	 * Given a sample set, computes the overall error rate over the network computations.
-	 *
+	 * 
 	 * @param networkContext
 	 *            the neural network learning context.
 	 * @param testSet
@@ -52,7 +52,7 @@ public abstract class LearningContext
 
 	/**
 	 * Performs the training algorithm.
-	 *
+	 * 
 	 * @param networkContext
 	 *            the neural network within its learning context.
 	 */

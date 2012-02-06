@@ -38,7 +38,8 @@ public class NeuralNetworkTest
 
 			for (int i = 1; i < layerSizes.length - 1; i++)
 			{
-				Layer<? extends Neuron> targetLayer = Layer.buildHiddenLayer(layerSizes[i], new LinearActivationFunction());
+				Layer<? extends Neuron> targetLayer = Layer.buildHiddenLayer(layerSizes[i],
+						new LinearActivationFunction());
 				Connection.buildConnections(inputLayer, targetLayer, weight);
 				inputLayer = targetLayer;
 			}

@@ -9,12 +9,12 @@ public interface IActivationFunction
 {
 
     /**
-     * Compute the function f value given an input parameter.
-     *
-     * @param inputValue
-     *            the input value.
-     * @return f(input)
-     */
-    double computeValue(double inputValue);
+	 * Compute the function f value given an input parameter.
+	 * 
+	 * @param inputValue
+	 *            the input value.
+	 * @return f(input)
+	 */
+	double computeValue(double inputValue);
 
 }

@@ -2,7 +2,7 @@ package fr.hartland.serenna.core;
 
 /**
  * Generic class for all possible neural network nodes.
- *
+ * 
  * @author cedric.hartland
  */
 public abstract class Unit
@@ -11,7 +11,7 @@ public abstract class Unit
 
 	/**
 	 * Default constructor. Each node can have an identifier (non necessarily unique).
-	 *
+	 * 
 	 * @param name
 	 *            the node name.
 	 */
@@ -30,6 +30,5 @@ public abstract class Unit
 	 * Given weighted input value(s) provided to the node, compute the output value.
 	 */
 	protected abstract void compute();
-
 
 }

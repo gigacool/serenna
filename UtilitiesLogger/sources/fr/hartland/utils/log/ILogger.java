@@ -4,7 +4,8 @@ package fr.hartland.utils.log;
  * General logging interface.
  * 
  */
-public interface ILogger {
+public interface ILogger
+{
 
 	/** Logging turned off */
 	short OFF = 1 << 0;

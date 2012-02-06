@@ -8,27 +8,27 @@ import java.util.Map;
  * Provides uniform mean to create file targeted loggers.
  * 
  */
-public class LoggerManager {
+public class LoggerManager
+{
 
 	private static Map<String, FileLogger> fileLoggers = new HashMap<String, FileLogger>();
 	private static ConsoleLogger console = new ConsoleLogger(ILogger.DEBUG);
 
 	/**
-	 * Builds or reuse the console logger. Change the logger level if logger
-	 * existed with a different level.
+	 * Builds or reuse the console logger. Change the logger level if logger existed with a different level.
 	 * 
 	 * @param level
 	 *            the logging level.
 	 * @return the console logger.
 	 */
-	public static ILogger buildConsoleLogger(short level) {
+	public static ILogger buildConsoleLogger(short level)
+	{
 		console.setLevel(level);
 		return console;
 	}
 
 	/**
-	 * Build a new file logger with provided parameters or return an already
-	 * existing logger, setting the level.
+	 * Build a new file logger with provided parameters or return an already existing logger, setting the level.
 	 * 
 	 * @param level
 	 *            the logging level.
@@ -39,29 +39,31 @@ public class LoggerManager {
 	 *             if file is not found.
 	 */
 	public static ILogger buildFileLogger(short level, String filePath)
-			throws FileNotFoundException {
+			throws FileNotFoundException
+	{
 		return buildFileLogger(level, filePath, false);
 	}
 
 	/**
-	 * Build a new file logger with provided parameters or return an already
-	 * existing logger, setting the level.
+	 * Build a new file logger with provided parameters or return an already existing logger, setting the level.
 	 * 
 	 * @param level
 	 *            the logging level.
 	 * @param filePath
 	 *            the log file path.
 	 * @param append
-	 *            concatenate logs to the file if true or replace content if
-	 *            false.
+	 *            concatenate logs to the file if true or replace content if false.
 	 * @return the file logger.
 	 * @throws FileNotFoundException
 	 *             if file is not found.
 	 */
 	public static ILogger buildFileLogger(short level, String filePath,
-			boolean append) throws FileNotFoundException {
-		synchronized (fileLoggers) {
-			if (fileLoggers.containsKey(filePath)) {
+			boolean append) throws FileNotFoundException
+	{
+		synchronized (fileLoggers)
+		{
+			if (fileLoggers.containsKey(filePath))
+			{
 				FileLogger logger = fileLoggers.get(filePath);
 				logger.setLevel(level);
 				return logger;

@@ -2,11 +2,11 @@ package fr.hartland.serenna.core.activations;
 
 /**
  * Defines <code>f(x) = a.x + b</code>.
- *
+ * 
  * @author cedric.hartland
  */
-public class LinearActivationFunction implements IDifferentiableActivationFunction {
-
+public class LinearActivationFunction implements IDifferentiableActivationFunction
+{
 	private double a;
 	private double b;
 
@@ -20,7 +20,7 @@ public class LinearActivationFunction implements IDifferentiableActivationFuncti
 
 	/**
 	 * Default constructor. Provides f(x) = a.x + b;
-	 *
+	 * 
 	 * @param a
 	 *            term 1.
 	 * @param b

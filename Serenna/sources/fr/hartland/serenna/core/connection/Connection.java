@@ -6,9 +6,9 @@ import fr.hartland.serenna.core.neuron.Neuron;
 import fr.hartland.serenna.utils.RandomProvider;
 
 /**
- * A connection provide a link from one neuron to another. The connection role is to convey values changed or unchanged (e.g. a
- * weighted connection).
- *
+ * A connection provide a link from one neuron to another. The connection role is to convey values changed or unchanged
+ * (e.g. a weighted connection).
+ * 
  * @author cedric.hartland
  */
 public class Connection
@@ -19,7 +19,7 @@ public class Connection
 
 	/**
 	 * Default constructor. An arc goes from one neuron to another.
-	 *
+	 * 
 	 * @param inputNeuron
 	 *            the neuron providing value to the arc.
 	 * @param outputNeuron
@@ -32,7 +32,7 @@ public class Connection
 
 	/**
 	 * Default constructor. An arc goes from one neuron to another.
-	 *
+	 * 
 	 * @param inputNeuron
 	 *            the neuron providing value to the arc.
 	 * @param outputNeuron
@@ -49,7 +49,7 @@ public class Connection
 
 	/**
 	 * Connection factory builder.
-	 *
+	 * 
 	 * @param inputNeuron
 	 *            the neuron providing value to the arc.
 	 * @param outputNeuron
@@ -65,9 +65,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons from the
-	 * other layer. Each connection weights are set randomly in [-1:1].
-	 *
+	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons
+	 * from the other layer. Each connection weights are set randomly in [-1:1].
+	 * 
 	 * @param source
 	 *            the source layer.
 	 * @param target
@@ -85,9 +85,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to target
-	 * neuron. Each connection weights are set randomly in [-1:1].
-	 *
+	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to
+	 * target neuron. Each connection weights are set randomly in [-1:1].
+	 * 
 	 * @param source
 	 *            the source layer.
 	 * @param target
@@ -102,9 +102,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to source
-	 * neuron. Each connection weights are set randomly in [-1:1].
-	 *
+	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to
+	 * source neuron. Each connection weights are set randomly in [-1:1].
+	 * 
 	 * @param source
 	 *            the source neuron.
 	 * @param target
@@ -120,7 +120,7 @@ public class Connection
 
 	/**
 	 * Connection factory builder.
-	 *
+	 * 
 	 * @param inputNeuron
 	 *            the neuron providing value to the arc.
 	 * @param outputNeuron
@@ -138,9 +138,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons from the
-	 * other layer.
-	 *
+	 * Connection factory builder between two layers. Each neuron from one layer is fully connected to all other neurons
+	 * from the other layer.
+	 * 
 	 * @param source
 	 *            the source layer.
 	 * @param target
@@ -148,7 +148,8 @@ public class Connection
 	 * @param defaultWeight
 	 *            the default connection weights.
 	 */
-	public static void buildConnections(Layer<? extends Neuron> source, Layer<? extends Neuron> target, double defaultWeight)
+	public static void buildConnections(Layer<? extends Neuron> source, Layer<? extends Neuron> target,
+			double defaultWeight)
 	{
 		for (Neuron sourceNeuron : source.getNeurons())
 		{
@@ -160,9 +161,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to target
-	 * neuron.
-	 *
+	 * Connection factory builder between one layer and a neuron. Each neuron from source layer is fully connected to
+	 * target neuron.
+	 * 
 	 * @param source
 	 *            the source layer.
 	 * @param target
@@ -180,7 +181,7 @@ public class Connection
 
 	/**
 	 * (Re)Defines the arc weight.
-	 *
+	 * 
 	 * @param weight
 	 *            the new arc weight.
 	 */
@@ -191,7 +192,7 @@ public class Connection
 
 	/**
 	 * Returns the connection weight value.
-	 *
+	 * 
 	 * @return the weight.
 	 */
 	public double getWeight()
@@ -201,7 +202,7 @@ public class Connection
 
 	/**
 	 * Returns the value contained within the neuron if any; else return default value.
-	 *
+	 * 
 	 * @return value computed during computation.
 	 */
 	public double getValue()
@@ -210,9 +211,9 @@ public class Connection
 	}
 
 	/**
-	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to source
-	 * neuron.
-	 *
+	 * Connection factory builder between one layer and a neuron. Each neuron from target layer is fully connected to
+	 * source neuron.
+	 * 
 	 * @param source
 	 *            the source neuron.
 	 * @param target
@@ -230,7 +231,7 @@ public class Connection
 
 	/**
 	 * Returns the arc input neuron.
-	 *
+	 * 
 	 * @return the input neuron.
 	 */
 	public Neuron getInputNeuron()
@@ -240,7 +241,7 @@ public class Connection
 
 	/**
 	 * Returns the arc output neuron.
-	 *
+	 * 
 	 * @return the output neuron.
 	 */
 	public Neuron getOutputNeuron()
