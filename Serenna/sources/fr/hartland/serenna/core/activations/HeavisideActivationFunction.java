@@ -27,7 +27,12 @@ public class HeavisideActivationFunction implements IActivationFunction
 	}
 
 	/**
-	 * Default constructor. Provides f(x) = { above, x < threshold; over, x >= threshold; }
+	 * Default constructor. Provides
+	 * 
+	 * <pre>
+	 * f(x) = { above, x < threshold; 
+	 *        { over, x >= threshold;
+	 * </pre>
 	 * 
 	 * @param threshold
 	 *            threshold
