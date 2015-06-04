@@ -1,0 +1,4 @@
+The goal of the project is to provide a generic Java library to manipulate neural networks. The main reason, facing the many existing libraries is the impossibility to find one being generic, modular and with a clean design (e.g. separate the actual neuron/network concepts from actual learning algorithms which are two independent concepts). to use To do so, three axes are considered :
+  * Multiple neural network implementations together with learning extensible framework.
+  * Simple graphical user interface for network and components design and analysis.
+  * Domain specific language for non developer usage.
